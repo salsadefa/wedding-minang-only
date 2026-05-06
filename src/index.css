@@ -1,0 +1,42 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  html {
+    font-family: 'Cormorant Garamond', serif;
+    background-color: #fdf8f3;
+    color: #7b1a1a;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: #fdf8f3;
+  }
+
+  #root {
+    min-height: 100vh;
+  }
+}
+
+@keyframes scrollCarousel {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-50%);
+  }
+}
