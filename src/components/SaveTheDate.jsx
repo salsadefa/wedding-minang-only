@@ -88,7 +88,7 @@ function SaveTheDate() {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.9, opacity: 0 }}
           transition={{ duration: 0.7, delay: 0.2, ease: 'easeOut' }}
-          className="mt-3 font-medium leading-none text-ivory"
+          className="mt-[0.25rem] font-medium leading-none text-ivory"
           style={{ fontSize: 'clamp(24px, 6vw, 36px)' }}
         >
           21 Juni 2026
@@ -98,7 +98,7 @@ function SaveTheDate() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
-          className="relative my-3 h-4 w-20"
+          className="relative my-[0.5rem] h-4 w-20"
         >
           <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-gold" />
           <div className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-gold bg-maroon" />
@@ -112,6 +112,7 @@ function SaveTheDate() {
             justifyContent: 'center',
             gap: '8px',
             width: '100%',
+            marginTop: '0.5rem',
           }}
         >
           {timerItems.map((item, index) => (
@@ -142,50 +143,112 @@ function SaveTheDate() {
           ))}
         </div>
 
-        <div className="mt-3 flex w-full flex-col gap-3">
+        <div className="mt-[0.5rem] flex w-full flex-col items-center">
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
             transition={{ duration: 0.6, delay: 1.1, ease: 'easeOut' }}
-            className="rounded-[8px] border border-gold bg-[#8C2020] px-4 py-3 text-center"
+            style={{ display: 'flex', gap: '12px', width: '100%', maxWidth: '360px' }}
           >
-            <p className="text-[11px] uppercase tracking-[0.3em] text-gold">
-              Akad Nikah
-            </p>
-            <p className="mt-2 text-[18px] text-ivory">08.00 — 10.00 WIB</p>
-            <div className="my-3 h-px bg-ivory opacity-30" />
-            <p className="text-[14px] font-medium text-ivory">
-              Aula SMK Pertanian Pembangunan Negeri Padang
-            </p>
-            <p className="mt-2 text-[11px] font-light leading-relaxed text-ivory opacity-80">
-              Komplek BBI Lubuk Minturun, Jl. Pertanian, Lubuk Minturun, Kec.
-              Koto Tangah, Padang
-            </p>
-            <a
-              href="https://maps.app.goo.gl/uobPZQJnyQU5tE627"
-              target="_blank"
-              rel="noreferrer"
-              className="mt-4 inline-flex rounded-[6px] border border-gold bg-transparent px-[14px] py-1.5 text-[12px] text-gold"
+            <div
+              style={{
+                flex: 1,
+                background: '#8C2020',
+                border: '1px solid #C49A2A',
+                borderRadius: '8px',
+                padding: '0.75rem',
+                textAlign: 'center',
+              }}
             >
-              Buka di Google Maps
-            </a>
+              <p
+                style={{
+                  color: '#C49A2A',
+                  fontSize: '10px',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Akad Nikah
+              </p>
+              <p
+                style={{
+                  color: '#F5E6C8',
+                  fontSize: '16px',
+                  fontFamily: 'Cormorant Garamond',
+                  margin: '4px 0',
+                }}
+              >
+                08.00 — 10.00
+              </p>
+              <p style={{ color: '#F5E6C8', fontSize: '10px', opacity: 0.7 }}>WIB</p>
+            </div>
+            <div
+              style={{
+                flex: 1,
+                background: '#8C2020',
+                border: '1px solid #C49A2A',
+                borderRadius: '8px',
+                padding: '0.75rem',
+                textAlign: 'center',
+              }}
+            >
+              <p
+                style={{
+                  color: '#C49A2A',
+                  fontSize: '10px',
+                  letterSpacing: '0.1em',
+                  textTransform: 'uppercase',
+                }}
+              >
+                Resepsi
+              </p>
+              <p
+                style={{
+                  color: '#F5E6C8',
+                  fontSize: '16px',
+                  fontFamily: 'Cormorant Garamond',
+                  margin: '4px 0',
+                }}
+              >
+                10.00 — 17.00
+              </p>
+              <p style={{ color: '#F5E6C8', fontSize: '10px', opacity: 0.7 }}>WIB</p>
+            </div>
           </motion.div>
 
           <motion.div
             initial={{ y: 30, opacity: 0 }}
             animate={isInView ? { y: 0, opacity: 1 } : { y: 30, opacity: 0 }}
-            transition={{ duration: 0.6, delay: 1.3, ease: 'easeOut' }}
-            className="rounded-[8px] border border-gold bg-[#8C2020] px-4 py-3 text-center"
+            transition={{ duration: 0.6, delay: 1.25, ease: 'easeOut' }}
+            style={{
+              width: '100%',
+              maxWidth: '360px',
+              background: '#8C2020',
+              border: '1px solid #C49A2A',
+              borderRadius: '8px',
+              padding: '0.75rem 1rem',
+              textAlign: 'center',
+              marginTop: '8px',
+            }}
           >
-            <p className="text-[11px] uppercase tracking-[0.3em] text-gold">
-              Resepsi
-            </p>
-            <p className="mt-2 text-[18px] text-ivory">10.00 — 17.00 WIB</p>
-            <div className="my-3 h-px bg-ivory opacity-30" />
-            <p className="text-[14px] font-medium text-ivory">
+            <p
+              style={{
+                color: '#F5E6C8',
+                fontSize: '13px',
+                fontWeight: 500,
+                marginBottom: '4px',
+              }}
+            >
               Aula SMK Pertanian Pembangunan Negeri Padang
             </p>
-            <p className="mt-2 text-[11px] font-light leading-relaxed text-ivory opacity-80">
+            <p
+              style={{
+                color: '#F5E6C8',
+                fontSize: '11px',
+                opacity: 0.7,
+                lineHeight: 1.5,
+              }}
+            >
               Komplek BBI Lubuk Minturun, Jl. Pertanian, Lubuk Minturun, Kec.
               Koto Tangah, Padang
             </p>
@@ -193,7 +256,16 @@ function SaveTheDate() {
               href="https://maps.app.goo.gl/uobPZQJnyQU5tE627"
               target="_blank"
               rel="noreferrer"
-              className="mt-4 inline-flex rounded-[6px] border border-gold bg-transparent px-[14px] py-1.5 text-[12px] text-gold"
+              style={{
+                display: 'inline-block',
+                marginTop: '8px',
+                border: '1px solid #C49A2A',
+                color: '#C49A2A',
+                borderRadius: '6px',
+                padding: '4px 12px',
+                fontSize: '11px',
+                textDecoration: 'none',
+              }}
             >
               Buka di Google Maps
             </a>
@@ -204,7 +276,7 @@ function SaveTheDate() {
           initial={{ opacity: 0 }}
           animate={isInView ? { opacity: 1 } : { opacity: 0 }}
           transition={{ duration: 0.5, delay: 1.5, ease: 'easeOut' }}
-          className="mt-3 text-[13px] italic text-ivory opacity-70"
+          className="mt-[0.5rem] text-[13px] italic text-ivory opacity-70"
         >
           Dua momen, satu hari, satu tempat.
         </motion.p>

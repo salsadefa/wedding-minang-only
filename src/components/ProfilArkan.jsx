@@ -8,8 +8,8 @@ function ProfilArkan() {
   return (
     <section
       ref={sectionRef}
-      className="relative isolate flex h-[100dvh] items-center justify-center overflow-hidden bg-maroon px-8 py-4 font-cormorant"
-      style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always', overflow: 'hidden' }}
+      className="relative isolate flex h-[100dvh] items-center justify-center bg-maroon px-8 py-4 font-cormorant"
+      style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always', overflow: 'visible' }}
     >
       <div className="absolute inset-0 z-0 bg-maroon" />
 
@@ -44,44 +44,24 @@ function ProfilArkan() {
         >
           <div
             style={{
-              position: 'relative',
-              width: 'min(190px, 50vw)',
+              width: 'min(200px, 55vw)',
+              height: 'min(270px, 40vh)',
+              clipPath:
+                "path('M 100,0 C 150,0 200,50 200,100 L 200,270 L 0,270 L 0,100 C 0,50 50,0 100,0 Z')",
+              overflow: 'hidden',
               margin: '0 auto',
+              filter: 'drop-shadow(0 0 2px #C49A2A) drop-shadow(0 0 4px #C49A2A)',
             }}
           >
-            <div
+            <img
+              src="/arkan-profile.jpg"
+              alt="I Nyoman Krisna Arkandea"
               style={{
-                width: 'min(190px, 50vw)',
-                height: 'min(260px, 35vh)',
-                clipPath:
-                  "path('M 0,300 L 0,110 Q 0,0 110,0 Q 220,0 220,110 L 220,300 Z')",
-                overflow: 'hidden',
-                position: 'relative',
-              }}
-            >
-              <img
-                src="/arkan-profile.jpg"
-                alt="I Nyoman Krisna Arkandea"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                  objectFit: 'cover',
-                  display: 'block',
-                  transform: 'scaleX(-1)',
-                }}
-              />
-            </div>
-            <div
-              style={{
-                position: 'absolute',
-                top: '-3px',
-                left: '-3px',
-                width: 'calc(min(190px, 50vw) + 6px)',
-                height: 'calc(min(260px, 35vh) + 6px)',
-                clipPath:
-                  "path('M 0,306 L 0,113 Q 0,0 113,0 Q 226,0 226,113 L 226,306 Z')",
-                background: '#C49A2A',
-                zIndex: -1,
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                display: 'block',
+                transform: 'scaleX(-1)',
               }}
             />
           </div>

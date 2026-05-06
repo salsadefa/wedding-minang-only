@@ -111,7 +111,7 @@ function Ucapan() {
         minHeight: '100dvh',
         scrollSnapAlign: 'start',
         scrollSnapStop: 'normal',
-        overflowY: 'auto',
+        overflow: 'hidden',
       }}
     >
       <div className="absolute inset-0 bg-maroon" />
@@ -127,7 +127,14 @@ function Ucapan() {
         }}
       />
 
-      <div className="relative z-10 mx-auto flex min-h-screen w-full max-w-2xl flex-col items-center justify-center py-8 text-center">
+      <div
+        className="relative z-10 mx-auto flex min-h-screen w-full max-w-2xl flex-col items-center justify-center py-8 text-center"
+        style={{
+          overflowY: 'auto',
+          height: '100%',
+          WebkitOverflowScrolling: 'touch',
+        }}
+      >
         <motion.div
           initial={{ y: 20, opacity: 0 }}
           animate={isInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
