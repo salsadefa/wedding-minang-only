@@ -145,12 +145,13 @@ function Closing() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
               style={{
-                width: '200px',
-                height: '260px',
+                width: '180px',
+                height: '230px',
                 clipPath:
-                  "path('M 100,0 C 150,0 200,50 200,100 L 200,260 L 0,260 L 0,100 C 0,50 50,0 100,0 Z')",
+                  "path('M 90,0 C 135,0 180,45 180,90 L 180,230 L 0,230 L 0,90 C 0,45 45,0 90,0 Z')",
                 overflow: 'hidden',
                 margin: '0 auto',
+                marginTop: '12px',
                 filter: 'drop-shadow(0 0 3px #C49A2A) drop-shadow(0 0 8px rgba(196,154,42,0.5))',
                 position: 'relative',
                 zIndex: 2,
