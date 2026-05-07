@@ -167,10 +167,13 @@ function AmplopDigital() {
               Doa dan kehadiran Anda sudah lebih dari cukup
             </h2>
 
-            <p className="mt-2 max-w-[280px] text-[13px] text-ivory opacity-70">
-              Namun jika Anda ingin memberikan tanda kasih, kami dengan senang hati
-              menerimanya
-            </p>
+          <p
+            className="mt-2 text-[13px] text-ivory opacity-70"
+            style={{ textAlign: 'center', width: '100%', maxWidth: '280px', margin: '0.5rem auto 0' }}
+          >
+            Namun jika Anda ingin memberikan tanda kasih, kami dengan senang hati
+            menerimanya
+          </p>
           </motion.div>
 
           <motion.div
