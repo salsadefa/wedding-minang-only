@@ -1,13 +1,14 @@
 import { useEffect, useRef } from 'react'
+import { User, Users, Calendar, Mail, Gift, Images, Heart } from 'lucide-react'
 
 const NAV_ITEMS = [
-  { id: 'anak-daro', label: 'Anak Daro', icon: '👰' },
-  { id: 'marapulai', label: 'Marapulai', icon: '🤵' },
-  { id: 'tanggal', label: 'Tanggal', icon: '📅' },
-  { id: 'rsvp', label: 'RSVP', icon: '✉️' },
-  { id: 'kado', label: 'Kirim Kado', icon: '🎁' },
-  { id: 'galeri', label: 'Galeri', icon: '🖼️' },
-  { id: 'closing', label: 'Penutup', icon: '🤍' },
+  { id: 'anak-daro', label: 'Anak Daro', Icon: User },
+  { id: 'marapulai', label: 'Marapulai', Icon: Users },
+  { id: 'tanggal', label: 'Tanggal', Icon: Calendar },
+  { id: 'rsvp', label: 'RSVP', Icon: Mail },
+  { id: 'kado', label: 'Kirim Kado', Icon: Gift },
+  { id: 'galeri', label: 'Galeri', Icon: Images },
+  { id: 'closing', label: 'Penutup', Icon: Heart },
 ]
 
 function Navbar({ activeSection, onNavClick }) {
@@ -73,13 +74,17 @@ function Navbar({ activeSection, onNavClick }) {
                 minWidth: '25%',
               }}
             >
-              <span style={{ fontSize: '20px', lineHeight: 1 }}>{item.icon}</span>
+              <item.Icon
+                size={22}
+                strokeWidth={1.5}
+                color={isActive ? '#F0D080' : '#C49A2A'}
+              />
               <span
                 style={{
                   color: isActive ? '#C49A2A' : '#F5E6C8',
                   fontSize: '10px',
                   marginTop: '4px',
-                  fontFamily: 'Cormorant Garamond',
+                  fontFamily: 'Lora',
                   letterSpacing: '0.03em',
                   whiteSpace: 'nowrap',
                 }}

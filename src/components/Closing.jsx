@@ -62,7 +62,7 @@ function Closing() {
         background: 'linear-gradient(to bottom, #3B1F0E 0%, #5C1A0E 40%, #7B1A1A 100%)',
         scrollSnapAlign: 'start',
         scrollSnapStop: 'always',
-        fontFamily: 'Cormorant Garamond, serif',
+        fontFamily: 'Lora, serif',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
@@ -180,7 +180,7 @@ function Closing() {
         >
           <h2
             style={{
-              fontFamily: 'Cormorant Garamond',
+              fontFamily: 'Lora',
               fontSize: 'clamp(20px, 4vw, 26px)',
               fontWeight: 500,
               color: '#F5E6C8',
@@ -214,7 +214,7 @@ function Closing() {
           style={{
             maxWidth: '240px',
             margin: '0 auto',
-            fontFamily: 'Cormorant Garamond',
+            fontFamily: 'Lora',
             fontStyle: 'italic',
             fontSize: '11px',
             color: 'rgba(245,230,200,0.85)',
@@ -235,7 +235,7 @@ function Closing() {
         >
           <p
             style={{
-              fontFamily: 'Cormorant Garamond',
+              fontFamily: 'Lora',
               fontSize: '10px',
               color: '#C49A2A',
               letterSpacing: '0.1em',
@@ -248,7 +248,7 @@ function Closing() {
           </p>
           <p
             style={{
-              fontFamily: 'Cormorant Garamond',
+              fontFamily: 'Lora',
               fontSize: 'clamp(16px, 3.5vw, 20px)',
               fontWeight: '600',
               letterSpacing: '0.05em',

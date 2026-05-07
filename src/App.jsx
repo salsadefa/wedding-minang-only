@@ -3,6 +3,7 @@ import AmplopDigital from './components/AmplopDigital.jsx'
 import Closing from './components/Closing.jsx'
 import CurtainTransition from './components/CurtainTransition.jsx'
 import Gallery from './components/Gallery.jsx'
+import LoadingScreen from './components/LoadingScreen.jsx'
 import MusicPlayer from './components/MusicPlayer.jsx'
 import Navbar from './components/Navbar.jsx'
 import ProfilArkan from './components/ProfilArkan.jsx'
@@ -15,6 +16,7 @@ const SECTION_DURATION = 3000
 const PROGRESS_INTERVAL = 30
 
 function App() {
+  const [isLoading, setIsLoading] = useState(true)
   const [activeSection, setActiveSection] = useState('anak-daro')
   const [progress, setProgress] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -225,57 +227,62 @@ function App() {
 
   return (
     <>
-      {showCurtain ? <CurtainTransition onComplete={handleCurtainComplete} /> : null}
-      {navbarVisible ? (
-        <div
-          style={{
-            position: 'fixed',
-            top: 0,
-            left: 0,
-            right: 0,
-            height: '3px',
-            zIndex: 500,
-            background: 'rgba(255,255,255,0.1)',
-            opacity: isPaused ? 0.5 : 1,
-          }}
-        >
+      {isLoading ? <LoadingScreen onComplete={() => setIsLoading(false)} /> : null}
+      {!isLoading ? (
+        <>
+          {showCurtain ? <CurtainTransition onComplete={handleCurtainComplete} /> : null}
+          {navbarVisible ? (
+            <div
+              style={{
+                position: 'fixed',
+                top: 0,
+                left: 0,
+                right: 0,
+                height: '3px',
+                zIndex: 500,
+                background: 'rgba(255,255,255,0.1)',
+                opacity: isPaused ? 0.5 : 1,
+              }}
+            >
+              <div
+                style={{
+                  height: '100%',
+                  width: `${progress}%`,
+                  background: 'linear-gradient(to right, #C49A2A, #F0D080)',
+                  transition: 'width 0.03s linear',
+                  borderRadius: '0 2px 2px 0',
+                }}
+              />
+            </div>
+          ) : null}
           <div
+            id="snap-scroll-container"
+            ref={scrollContainerRef}
             style={{
-              height: '100%',
-              width: `${progress}%`,
-              background: 'linear-gradient(to right, #C49A2A, #F0D080)',
-              transition: 'width 0.03s linear',
-              borderRadius: '0 2px 2px 0',
+              width: '100vw',
+              maxWidth: '100vw',
+              height: '100dvh',
+              margin: 0,
+              paddingLeft: 0,
+              paddingRight: 0,
+              overflowY: 'scroll',
+              scrollSnapType: 'y mandatory',
+              paddingBottom: '70px',
             }}
-          />
-        </div>
-      ) : null}
-      <div
-        id="snap-scroll-container"
-        ref={scrollContainerRef}
-        style={{
-          width: '100vw',
-          maxWidth: '100vw',
-          height: '100dvh',
-          margin: 0,
-          paddingLeft: 0,
-          paddingRight: 0,
-          overflowY: 'scroll',
-          scrollSnapType: 'y mandatory',
-          paddingBottom: '70px',
-        }}
-      >
-        <ProfilSalsa />
-        <ProfilArkan />
-        <SaveTheDate />
-        <RSVP />
-        <AmplopDigital />
-        <Gallery />
-        <Closing />
-      </div>
-      {navbarVisible ? <MusicPlayer /> : null}
-      {navbarVisible ? (
-        <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
+          >
+            <ProfilSalsa />
+            <ProfilArkan />
+            <SaveTheDate />
+            <RSVP />
+            <AmplopDigital />
+            <Gallery />
+            <Closing />
+          </div>
+          {navbarVisible ? <MusicPlayer /> : null}
+          {navbarVisible ? (
+            <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
+          ) : null}
+        </>
       ) : null}
     </>
   )

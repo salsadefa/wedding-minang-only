@@ -1,9 +1,21 @@
-import { useRef } from 'react'
+import { useMemo, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 function ProfilArkan() {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.5 })
+  const particles = useMemo(
+    () =>
+      Array.from({ length: 25 }, (_, index) => ({
+        id: index,
+        left: `${Math.random() * 100}%`,
+        size: Math.random() * 3 + 1.5,
+        duration: Math.random() * 6 + 5,
+        delay: Math.random() * 5,
+        opacity: Math.random() * 0.25 + 0.05,
+      })),
+    [],
+  )
 
   return (
     <section
@@ -25,6 +37,26 @@ function ProfilArkan() {
         }}
       />
 
+      <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none', overflow: 'hidden' }}>
+        {particles.map((particle) => (
+          <div
+            key={particle.id}
+            style={{
+              position: 'absolute',
+              left: particle.left,
+              bottom: 0,
+              width: `${particle.size}px`,
+              height: `${particle.size}px`,
+              borderRadius: '50%',
+              background: '#C49A2A',
+              animation: `floatUp ${particle.duration}s ${particle.delay}s linear infinite`,
+              opacity: particle.opacity,
+              pointerEvents: 'none',
+            }}
+          />
+        ))}
+      </div>
+
       <div className="relative z-10 flex w-full max-w-xl flex-col items-center text-center">
         <motion.p
           initial={{ y: 20, opacity: 0 }}
@@ -45,26 +77,62 @@ function ProfilArkan() {
         >
           <div
             style={{
-              width: 'min(200px, 55vw)',
-              height: 'min(270px, 40vh)',
-              clipPath:
-                "path('M 100,0 C 150,0 200,50 200,100 L 200,270 L 0,270 L 0,100 C 0,50 50,0 100,0 Z')",
-              overflow: 'hidden',
+              position: 'relative',
+              width: '220px',
               margin: '0 auto',
-              filter: 'drop-shadow(0 0 2px #C49A2A) drop-shadow(0 0 4px #C49A2A)',
             }}
           >
-            <img
-              src="/arkan-profile.jpg"
-              alt="I Nyoman Krisna Arkandea"
+            <div
               style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'cover',
-                display: 'block',
-                transform: 'scaleX(-1)',
+                position: 'absolute',
+                top: '-3px',
+                left: '-3px',
+                width: '226px',
+                height: '296px',
+                clipPath:
+                  "path('M 113,0 C 169,0 226,56 226,113 L 226,296 L 0,296 L 0,113 C 0,56 56,0 113,0 Z')",
+                background: 'linear-gradient(135deg, #C49A2A, #F0D080, #C49A2A)',
+                filter: 'blur(4px)',
+                opacity: 0.8,
+                zIndex: 0,
               }}
             />
+            <div
+              style={{
+                position: 'absolute',
+                top: '-2px',
+                left: '-2px',
+                width: '224px',
+                height: '294px',
+                clipPath:
+                  "path('M 112,0 C 168,0 224,56 224,112 L 224,294 L 0,294 L 0,112 C 0,56 56,0 112,0 Z')",
+                background: 'linear-gradient(135deg, #C49A2A, #F0D080, #C49A2A)',
+                zIndex: 0,
+              }}
+            />
+            <div
+              style={{
+                position: 'relative',
+                width: '220px',
+                height: '290px',
+                clipPath:
+                  "path('M 110,0 C 165,0 220,55 220,110 L 220,290 L 0,290 L 0,110 C 0,55 55,0 110,0 Z')",
+                overflow: 'hidden',
+                zIndex: 1,
+              }}
+            >
+              <img
+                src="/arkan-profile.jpg"
+                alt="I Nyoman Krisna Arkandea"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  display: 'block',
+                  transform: 'scaleX(-1)',
+                }}
+              />
+            </div>
           </div>
         </motion.div>
 

@@ -45,7 +45,7 @@ function CurtainTransition({ onComplete }) {
           />
           <p
             style={{
-              fontFamily: 'Cormorant Garamond',
+              fontFamily: 'Lora',
               fontSize: '12px',
               letterSpacing: '0.45em',
               textTransform: 'uppercase',
@@ -57,7 +57,7 @@ function CurtainTransition({ onComplete }) {
           </p>
           <p
             style={{
-              fontFamily: 'Cormorant Garamond',
+              fontFamily: 'Lora',
               fontSize: '24px',
               fontStyle: 'italic',
               color: '#F5E6C8',

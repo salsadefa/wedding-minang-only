@@ -325,7 +325,7 @@ function RSVP() {
                     borderRadius: '8px',
                     padding: '10px 14px',
                     color: '#F5E6C8',
-                    fontFamily: 'Cormorant Garamond',
+                    fontFamily: 'Lora',
                     fontSize: '15px',
                     width: '100%',
                     height: '100px',

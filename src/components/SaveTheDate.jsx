@@ -174,7 +174,7 @@ function SaveTheDate() {
                 style={{
                   color: '#F5E6C8',
                   fontSize: '16px',
-                  fontFamily: 'Cormorant Garamond',
+                  fontFamily: 'Lora',
                   margin: '4px 0',
                 }}
               >
@@ -206,7 +206,7 @@ function SaveTheDate() {
                 style={{
                   color: '#F5E6C8',
                   fontSize: '16px',
-                  fontFamily: 'Cormorant Garamond',
+                  fontFamily: 'Lora',
                   margin: '4px 0',
                 }}
               >

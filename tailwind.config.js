@@ -10,7 +10,7 @@ export default {
         cream: '#FDF8F3',
       },
       fontFamily: {
-        cormorant: ['"Cormorant Garamond"', 'serif'],
+        cormorant: ['Lora', 'serif'],
       },
     },
   },

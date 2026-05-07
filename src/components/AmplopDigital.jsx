@@ -207,7 +207,7 @@ function AmplopDigital() {
                 borderRadius: '8px',
                 padding: '14px 24px',
                 color: '#C49A2A',
-                fontFamily: 'Cormorant Garamond',
+                fontFamily: 'Lora',
                 fontSize: '16px',
                 letterSpacing: '0.05em',
                 cursor: 'pointer',
@@ -226,7 +226,7 @@ function AmplopDigital() {
                 borderRadius: '8px',
                 padding: '14px 24px',
                 color: '#C49A2A',
-                fontFamily: 'Cormorant Garamond',
+                fontFamily: 'Lora',
                 fontSize: '16px',
                 letterSpacing: '0.05em',
                 cursor: 'pointer',
@@ -319,7 +319,7 @@ function AmplopDigital() {
                       style={{
                         color: '#F5E6C8',
                         fontSize: '20px',
-                        fontFamily: 'Cormorant Garamond',
+                        fontFamily: 'Lora',
                         fontWeight: 500,
                         margin: 0,
                       }}
@@ -372,7 +372,7 @@ function AmplopDigital() {
                       style={{
                         color: '#F5E6C8',
                         fontSize: '20px',
-                        fontFamily: 'Cormorant Garamond',
+                        fontFamily: 'Lora',
                         fontWeight: 500,
                         margin: 0,
                       }}
