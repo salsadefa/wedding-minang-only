@@ -156,6 +156,11 @@ function AmplopDigital() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
+          animation:
+            songketSrc === '/songket-padang-mobile.svg'
+              ? 'breathe 6s ease-in-out infinite'
+              : 'none',
+          transformOrigin: 'center center',
         }}
       />
 
