@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import AmplopDigital from './components/AmplopDigital.jsx'
+import Closing from './components/Closing.jsx'
 import CurtainTransition from './components/CurtainTransition.jsx'
 import MusicPlayer from './components/MusicPlayer.jsx'
 import Navbar from './components/Navbar.jsx'
@@ -9,7 +10,7 @@ import RSVP from './components/RSVP.jsx'
 import SaveTheDate from './components/SaveTheDate.jsx'
 import Ucapan from './components/Ucapan.jsx'
 
-const SECTION_IDS = ['anak-daro', 'marapulai', 'tanggal', 'rsvp', 'kado', 'ucapan']
+const SECTION_IDS = ['anak-daro', 'marapulai', 'tanggal', 'rsvp', 'kado', 'ucapan', 'closing']
 const SECTION_DURATION = 3000
 const PROGRESS_INTERVAL = 30
 
@@ -260,6 +261,7 @@ function App() {
         <RSVP />
         <AmplopDigital />
         <Ucapan />
+        <Closing />
       </div>
       {navbarVisible ? <MusicPlayer /> : null}
       {navbarVisible ? (

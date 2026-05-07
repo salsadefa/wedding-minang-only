@@ -7,6 +7,7 @@ const NAV_ITEMS = [
   { id: 'rsvp', label: 'RSVP', icon: '✉️' },
   { id: 'kado', label: 'Kirim Kado', icon: '🎁' },
   { id: 'ucapan', label: 'Ucapan', icon: '💬' },
+  { id: 'closing', label: 'Penutup', icon: '🤍' },
 ]
 
 function Navbar({ activeSection, onNavClick }) {
