@@ -49,47 +49,34 @@ function Closing() {
     <section
       id="closing"
       ref={sectionRef}
-      className="relative overflow-hidden px-8 py-10 font-cormorant"
+      className=""
       style={{
-        minHeight: '100vh',
+        minHeight: '100dvh',
+        width: '100vw',
+        maxWidth: '100vw',
         position: 'relative',
         overflow: 'hidden',
+        margin: 0,
+        padding: 0,
         background: 'linear-gradient(to bottom, #3B1F0E 0%, #5C1A0E 40%, #7B1A1A 100%)',
         scrollSnapAlign: 'start',
         scrollSnapStop: 'always',
+        fontFamily: 'Cormorant Garamond, serif',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
       }}
     >
       <div
+        className="absolute inset-0 z-0 pointer-events-none"
         style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          left: 0,
-          width: 'min(28vw, 180px)',
+          width: '100vw',
           backgroundImage: `url('${songketSrc}')`,
-          backgroundRepeat: 'no-repeat',
           backgroundSize: 'cover',
-          backgroundPosition: 'left center',
-          opacity: 0.15,
-          zIndex: 0,
-          pointerEvents: 'none',
-        }}
-      />
-      <div
-        style={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          right: 0,
-          width: 'min(28vw, 180px)',
-          backgroundImage: `url('${songketSrc}')`,
+          backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          backgroundSize: 'cover',
-          backgroundPosition: 'right center',
-          opacity: 0.15,
-          zIndex: 0,
-          pointerEvents: 'none',
-          transform: 'scaleX(-1)',
+          opacity: 0.2,
         }}
       />
 
@@ -113,52 +100,74 @@ function Closing() {
       ))}
 
       <div
-        className="relative z-[2] mx-auto flex w-full max-w-2xl flex-col items-center justify-center px-8 py-8 text-center"
-        style={{ minHeight: '100vh', gap: '0.25rem' }}
+        className="relative z-[2] flex w-full flex-col items-center justify-center px-8 py-8 text-center"
+        style={{
+          minHeight: '100dvh',
+          gap: '0.25rem',
+          alignItems: 'center',
+          width: '100%',
+          maxWidth: 'none',
+          margin: 0,
+        }}
       >
-        <motion.img
-          src="/rumah-gadang.svg"
-          alt="Rumah Gadang"
-          initial={{ scale: 0.9, opacity: 0 }}
-          animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.9, opacity: 0 }}
-          transition={{ delay: 0.1, duration: 0.8, ease: 'easeOut' }}
+        <div
           style={{
-            width: 'min(280px, 70vw)',
-            objectFit: 'contain',
-            filter: 'drop-shadow(0 4px 20px rgba(196,154,42,0.4))',
-            marginBottom: '-20px',
-            zIndex: 3,
-            position: 'relative',
-          }}
-        />
-
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
-          transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
-          style={{
-            width: 'min(220px, 55vw)',
-            height: 'min(280px, 40vh)',
-            clipPath:
-              "path('M 110,0 C 160,0 220,50 220,100 L 220,280 L 0,280 L 0,100 C 0,50 60,0 110,0 Z')",
-            overflow: 'hidden',
-            margin: '0 auto',
-            filter: 'drop-shadow(0 0 3px #C49A2A) drop-shadow(0 0 8px rgba(196,154,42,0.5))',
-            position: 'relative',
-            zIndex: 2,
+            width: '100%',
+            display: 'flex',
+            flexDirection: 'column',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
         >
-          <img
-            src="/latar-rg.png"
-            alt="Salsa dan Arkan"
-            style={{
-              width: '100%',
-              height: '100%',
-              objectFit: 'cover',
-              objectPosition: 'top center',
-            }}
-          />
-        </motion.div>
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center' }}>
+            <motion.img
+              src="/rumah-gadang.svg"
+              alt="Rumah Gadang"
+              initial={{ scale: 0.9, opacity: 0 }}
+              animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.9, opacity: 0 }}
+              transition={{ delay: 0.1, duration: 0.8, ease: 'easeOut' }}
+              style={{
+                width: 'min(180px, 45vw)',
+                objectFit: 'contain',
+                filter:
+                  'drop-shadow(0 4px 20px rgba(196,154,42,0.5)) sepia(1) saturate(2) hue-rotate(5deg) brightness(1.1)',
+                marginBottom: '16px',
+                zIndex: 3,
+                position: 'relative',
+              }}
+            />
+          </div>
+
+          <div style={{ width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
+              transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
+              style={{
+                width: '220px',
+                height: '290px',
+                clipPath:
+                  "path('M 110,0 C 165,0 220,55 220,110 L 220,290 L 0,290 L 0,110 C 0,55 55,0 110,0 Z')",
+                overflow: 'hidden',
+                margin: '0 auto',
+                filter: 'drop-shadow(0 0 3px #C49A2A) drop-shadow(0 0 8px rgba(196,154,42,0.5))',
+                position: 'relative',
+                zIndex: 2,
+              }}
+            >
+              <img
+                src="/latar-rg.png"
+                alt="Salsa dan Arkan"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  objectPosition: 'top center',
+                }}
+              />
+            </motion.div>
+          </div>
+        </div>
 
         <Divider marginTop="1.5rem" />
 

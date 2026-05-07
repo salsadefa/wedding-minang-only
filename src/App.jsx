@@ -2,15 +2,15 @@ import { useEffect, useRef, useState } from 'react'
 import AmplopDigital from './components/AmplopDigital.jsx'
 import Closing from './components/Closing.jsx'
 import CurtainTransition from './components/CurtainTransition.jsx'
+import Gallery from './components/Gallery.jsx'
 import MusicPlayer from './components/MusicPlayer.jsx'
 import Navbar from './components/Navbar.jsx'
 import ProfilArkan from './components/ProfilArkan.jsx'
 import ProfilSalsa from './components/ProfilSalsa.jsx'
 import RSVP from './components/RSVP.jsx'
 import SaveTheDate from './components/SaveTheDate.jsx'
-import Ucapan from './components/Ucapan.jsx'
 
-const SECTION_IDS = ['anak-daro', 'marapulai', 'tanggal', 'rsvp', 'kado', 'ucapan', 'closing']
+const SECTION_IDS = ['anak-daro', 'marapulai', 'tanggal', 'rsvp', 'kado', 'galeri', 'closing']
 const SECTION_DURATION = 3000
 const PROGRESS_INTERVAL = 30
 
@@ -62,6 +62,11 @@ function App() {
       }
 
       const currentIndex = SECTION_IDS.indexOf(activeSectionRef.current)
+      const currentSectionEl = document.getElementById(SECTION_IDS[currentIndex])
+
+      if (currentSectionEl?.dataset?.noAutoscroll === 'true') {
+        return
+      }
 
       if (currentIndex < SECTION_IDS.length - 1) {
         const nextId = SECTION_IDS[currentIndex + 1]
@@ -249,7 +254,12 @@ function App() {
         id="snap-scroll-container"
         ref={scrollContainerRef}
         style={{
+          width: '100vw',
+          maxWidth: '100vw',
           height: '100dvh',
+          margin: 0,
+          paddingLeft: 0,
+          paddingRight: 0,
           overflowY: 'scroll',
           scrollSnapType: 'y mandatory',
           paddingBottom: '70px',
@@ -260,7 +270,7 @@ function App() {
         <SaveTheDate />
         <RSVP />
         <AmplopDigital />
-        <Ucapan />
+        <Gallery />
         <Closing />
       </div>
       {navbarVisible ? <MusicPlayer /> : null}

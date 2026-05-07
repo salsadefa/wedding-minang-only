@@ -6,7 +6,7 @@ const NAV_ITEMS = [
   { id: 'tanggal', label: 'Tanggal', icon: '📅' },
   { id: 'rsvp', label: 'RSVP', icon: '✉️' },
   { id: 'kado', label: 'Kirim Kado', icon: '🎁' },
-  { id: 'ucapan', label: 'Ucapan', icon: '💬' },
+  { id: 'galeri', label: 'Galeri', icon: '🖼️' },
   { id: 'closing', label: 'Penutup', icon: '🤍' },
 ]
 
