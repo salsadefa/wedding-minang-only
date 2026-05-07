@@ -16,11 +16,13 @@ const PROGRESS_INTERVAL = 30
 function App() {
   const [activeSection, setActiveSection] = useState('anak-daro')
   const [progress, setProgress] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
   const scrollContainerRef = useRef(null)
   const autoScrollTimerRef = useRef(null)
   const progressIntervalRef = useRef(null)
   const resumeAutoScrollTimeoutRef = useRef(null)
   const isManualScrollRef = useRef(false)
+  const isPausedRef = useRef(false)
   const activeSectionRef = useRef(activeSection)
 
   const startProgressBar = () => {
@@ -29,6 +31,10 @@ function App() {
     let elapsed = 0
 
     progressIntervalRef.current = window.setInterval(() => {
+      if (isPausedRef.current) {
+        return
+      }
+
       elapsed += PROGRESS_INTERVAL
       const pct = Math.min((elapsed / SECTION_DURATION) * 100, 100)
       setProgress(pct)
@@ -42,7 +48,7 @@ function App() {
   const startAutoScroll = () => {
     window.clearInterval(autoScrollTimerRef.current)
     autoScrollTimerRef.current = window.setInterval(() => {
-      if (isManualScrollRef.current) {
+      if (isManualScrollRef.current || isPausedRef.current) {
         return
       }
 
@@ -70,6 +76,31 @@ function App() {
   useEffect(() => {
     activeSectionRef.current = activeSection
   }, [activeSection])
+
+  useEffect(() => {
+    const handleFocus = (event) => {
+      if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+        isPausedRef.current = true
+        setIsPaused(true)
+      }
+    }
+
+    const handleBlur = (event) => {
+      if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+        isPausedRef.current = false
+        setIsPaused(false)
+        startProgressBar()
+      }
+    }
+
+    document.addEventListener('focusin', handleFocus)
+    document.addEventListener('focusout', handleBlur)
+
+    return () => {
+      document.removeEventListener('focusin', handleFocus)
+      document.removeEventListener('focusout', handleBlur)
+    }
+  }, [])
 
   useEffect(() => {
     const container = scrollContainerRef.current
@@ -159,6 +190,7 @@ function App() {
           height: '3px',
           zIndex: 500,
           background: 'rgba(255,255,255,0.1)',
+          opacity: isPaused ? 0.5 : 1,
         }}
       >
         <div
