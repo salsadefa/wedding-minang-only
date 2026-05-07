@@ -16,6 +16,7 @@ function Divider({ marginTop = '1rem', marginBottom = '0' }) {
 function Closing() {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 })
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.svg')
   const particles = useMemo(
     () =>
@@ -29,6 +30,14 @@ function Closing() {
       })),
     [],
   )
+
+  useEffect(() => {
+    const update = () => setIsMobile(window.innerWidth < 768)
+
+    window.addEventListener('resize', update)
+
+    return () => window.removeEventListener('resize', update)
+  }, [])
 
   useEffect(() => {
     const update = () => {
@@ -78,8 +87,64 @@ function Closing() {
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
+          animation:
+            songketSrc === '/songket-padang-mobile.svg'
+              ? 'breathe 6s ease-in-out infinite'
+              : 'none',
+          transformOrigin: 'center center',
         }}
       />
+
+      {isMobile && (
+        <>
+          {[
+            { src: '/batik-1.svg', size: 38, duration: 9, top: '20%' },
+            { src: '/batik-2.svg', size: 28, duration: 13, top: '38%' },
+            { src: '/batik-1.svg', size: 44, duration: 7, top: '56%' },
+            { src: '/batik-2.svg', size: 32, duration: 11, top: '74%' },
+          ].map((item, index) => (
+            <img
+              key={`batik-left-${index}`}
+              src={item.src}
+              style={{
+                position: 'absolute',
+                left: '8px',
+                top: item.top,
+                width: `${item.size}px`,
+                height: `${item.size}px`,
+                pointerEvents: 'none',
+                zIndex: 1,
+                animation: `rotateCW ${item.duration}s ease-in-out infinite`,
+                transformOrigin: 'center center',
+                opacity: 0.7,
+              }}
+            />
+          ))}
+          {[
+            { src: '/batik-2.svg', size: 42, duration: 8, top: '20%' },
+            { src: '/batik-1.svg', size: 30, duration: 10, top: '38%' },
+            { src: '/batik-2.svg', size: 48, duration: 6, top: '56%' },
+            { src: '/batik-1.svg', size: 36, duration: 12, top: '74%' },
+          ].map((item, index) => (
+            <img
+              key={`batik-right-${index}`}
+              src={item.src}
+              style={{
+                position: 'absolute',
+                right: '8px',
+                top: item.top,
+                width: `${item.size}px`,
+                height: `${item.size}px`,
+                pointerEvents: 'none',
+                zIndex: 1,
+                animation: `rotateCW ${item.duration}s ease-in-out infinite`,
+                transformOrigin: 'center center',
+                opacity: 0.7,
+              }}
+            />
+          ))}
+        </>
+      )}
 
       {particles.map((particle) => (
         <div
