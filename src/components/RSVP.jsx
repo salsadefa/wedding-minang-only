@@ -1,53 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
-
-const RSVP_STORAGE_KEY = 'wedding-maroon-rsvp'
-
-const initialWishes = [
-  {
-    nama: 'Budi Santoso',
-    pesan: 'Semoga menjadi keluarga yang sakinah mawaddah warahmah. Bahagia selalu!',
-  },
-  {
-    nama: 'Rina & Keluarga',
-    pesan: 'Selamat menempuh hidup baru, semoga langgeng sampai tua.',
-  },
-  {
-    nama: 'Tim Kantor',
-    pesan: 'Congrats Salsa & Arkan! Happily ever after starts now.',
-  },
-]
-
-function getStoredRsvp() {
-  const fallback = {
-    fullName: '',
-    phoneNumber: '',
-    attendance: '',
-    guestCount: 1,
-    hasSavedData: false,
-  }
-
-  const savedRsvp = window.localStorage.getItem(RSVP_STORAGE_KEY)
-
-  if (!savedRsvp) {
-    return fallback
-  }
-
-  try {
-    const parsed = JSON.parse(savedRsvp)
-
-    return {
-      fullName: parsed.fullName ?? '',
-      phoneNumber: parsed.phoneNumber ?? '',
-      attendance: parsed.attendance ?? '',
-      guestCount: parsed.guestCount ?? 1,
-      hasSavedData: true,
-    }
-  } catch {
-    window.localStorage.removeItem(RSVP_STORAGE_KEY)
-    return fallback
-  }
-}
+import { supabase } from '../lib/supabase'
 
 function Divider() {
   return (
@@ -59,21 +12,18 @@ function Divider() {
 }
 
 function RSVP() {
-  const [initialRsvp] = useState(() => getStoredRsvp())
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.4 })
-  const [hasSubmitted, setHasSubmitted] = useState(initialRsvp.hasSavedData)
-  const [fullName, setFullName] = useState(initialRsvp.fullName)
-  const [phoneNumber, setPhoneNumber] = useState(initialRsvp.phoneNumber)
-  const [attendance, setAttendance] = useState(initialRsvp.attendance)
-  const [guestCount, setGuestCount] = useState(initialRsvp.guestCount)
+  const [hasSubmitted, setHasSubmitted] = useState(false)
+  const [fullName, setFullName] = useState('')
+  const [phoneNumber, setPhoneNumber] = useState('')
+  const [attendance, setAttendance] = useState('')
+  const [guestCount, setGuestCount] = useState(1)
   const [pesan, setPesan] = useState('')
-  const [wishes, setWishes] = useState(initialWishes)
+  const [wishes, setWishes] = useState([])
   const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.svg')
   const [errorMessage, setErrorMessage] = useState('')
-  const [successMessage, setSuccessMessage] = useState(
-    initialRsvp.hasSavedData ? 'Konfirmasi terakhir Anda telah dimuat kembali.' : '',
-  )
+  const [successMessage, setSuccessMessage] = useState('')
 
   useEffect(() => {
     const update = () => {
@@ -90,7 +40,23 @@ function RSVP() {
     return () => window.removeEventListener('resize', update)
   }, [])
 
-  const handleSubmit = () => {
+  useEffect(() => {
+    const fetchWishes = async () => {
+      const { data, error } = await supabase
+        .from('wishes')
+        .select('nama, pesan')
+        .order('created_at', { ascending: false })
+        .limit(20)
+
+      if (!error && data) {
+        setWishes(data)
+      }
+    }
+
+    fetchWishes()
+  }, [])
+
+  const handleSubmit = async () => {
     const trimmedName = fullName.trim()
     const trimmedPhoneNumber = phoneNumber.trim()
     const trimmedPesan = pesan.trim()
@@ -101,31 +67,54 @@ function RSVP() {
       return
     }
 
-    const payload = {
-      fullName: trimmedName,
-      phoneNumber: trimmedPhoneNumber,
-      attendance,
-      guestCount,
-      pesan: trimmedPesan,
-      submittedAt: new Date().toISOString(),
-    }
+    try {
+      const { error: rsvpError } = await supabase
+        .from('rsvp')
+        .insert({
+          full_name: trimmedName,
+          phone_number: trimmedPhoneNumber,
+          attendance,
+          guest_count: guestCount,
+          pesan: trimmedPesan,
+        })
 
-    window.localStorage.setItem(RSVP_STORAGE_KEY, JSON.stringify(payload))
-    setWishes((current) => [
-      {
-        nama: trimmedName,
-        pesan: trimmedPesan || 'Turut berbahagia atas hari istimewa kalian.',
-      },
-      ...current,
-    ])
-    setFullName('')
-    setPhoneNumber('')
-    setAttendance('')
-    setGuestCount(1)
-    setPesan('')
-    setErrorMessage('')
-    setSuccessMessage('Konfirmasi tersimpan di perangkat ini.')
-    setHasSubmitted(true)
+      if (rsvpError) {
+        throw rsvpError
+      }
+
+      if (trimmedPesan) {
+        const { error: wishError } = await supabase
+          .from('wishes')
+          .insert({
+            nama: trimmedName,
+            pesan: trimmedPesan,
+          })
+
+        if (wishError) {
+          throw wishError
+        }
+      }
+
+      setWishes((current) => [
+        {
+          nama: trimmedName,
+          pesan: trimmedPesan || 'Turut berbahagia atas hari istimewa kalian.',
+        },
+        ...current,
+      ])
+
+      setFullName('')
+      setPhoneNumber('')
+      setAttendance('')
+      setGuestCount(1)
+      setPesan('')
+      setErrorMessage('')
+      setSuccessMessage('Konfirmasi tersimpan!')
+      setHasSubmitted(true)
+    } catch (err) {
+      console.error('Supabase error:', err)
+      setErrorMessage('Gagal menyimpan konfirmasi. Coba lagi ya!')
+    }
   }
 
   return (
