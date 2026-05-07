@@ -10,13 +10,34 @@ import TheShift from './components/TheShift.jsx'
 import Ucapan from './components/Ucapan.jsx'
 
 const SECTION_IDS = ['anak-daro', 'marapulai', 'tanggal', 'rsvp', 'kado', 'ucapan']
+const SECTION_DURATION = 3000
+const PROGRESS_INTERVAL = 30
 
 function App() {
   const [activeSection, setActiveSection] = useState('anak-daro')
+  const [progress, setProgress] = useState(0)
   const scrollContainerRef = useRef(null)
   const autoScrollTimerRef = useRef(null)
+  const progressIntervalRef = useRef(null)
+  const resumeAutoScrollTimeoutRef = useRef(null)
   const isManualScrollRef = useRef(false)
   const activeSectionRef = useRef(activeSection)
+
+  const startProgressBar = () => {
+    window.clearInterval(progressIntervalRef.current)
+    setProgress(0)
+    let elapsed = 0
+
+    progressIntervalRef.current = window.setInterval(() => {
+      elapsed += PROGRESS_INTERVAL
+      const pct = Math.min((elapsed / SECTION_DURATION) * 100, 100)
+      setProgress(pct)
+
+      if (elapsed >= SECTION_DURATION) {
+        window.clearInterval(progressIntervalRef.current)
+      }
+    }, PROGRESS_INTERVAL)
+  }
 
   const startAutoScroll = () => {
     window.clearInterval(autoScrollTimerRef.current)
@@ -75,11 +96,15 @@ function App() {
       }
 
       isManualScrollRef.current = true
-      window.clearTimeout(autoScrollTimerRef.current)
-      autoScrollTimerRef.current = window.setTimeout(() => {
+      window.clearInterval(autoScrollTimerRef.current)
+      window.clearInterval(progressIntervalRef.current)
+      setProgress(0)
+      window.clearTimeout(resumeAutoScrollTimeoutRef.current)
+      resumeAutoScrollTimeoutRef.current = window.setTimeout(() => {
         isManualScrollRef.current = false
+        startProgressBar()
         startAutoScroll()
-      }, 3000)
+      }, SECTION_DURATION)
     }
 
     container.addEventListener('scroll', handleScroll, { passive: true })
@@ -88,28 +113,64 @@ function App() {
   }, [])
 
   useEffect(() => {
+    startProgressBar()
     startAutoScroll()
 
-    return () => window.clearInterval(autoScrollTimerRef.current)
+    return () => {
+      window.clearInterval(autoScrollTimerRef.current)
+      window.clearInterval(progressIntervalRef.current)
+    }
   }, [activeSection])
 
   const handleNavClick = (sectionId) => {
     isManualScrollRef.current = true
     window.clearInterval(autoScrollTimerRef.current)
+    window.clearInterval(progressIntervalRef.current)
     const section = document.getElementById(sectionId)
 
     if (section) {
       section.scrollIntoView({ behavior: 'smooth' })
     }
 
-    window.setTimeout(() => {
+    startProgressBar()
+    window.clearTimeout(resumeAutoScrollTimeoutRef.current)
+    resumeAutoScrollTimeoutRef.current = window.setTimeout(() => {
       isManualScrollRef.current = false
       startAutoScroll()
-    }, 3000)
+    }, SECTION_DURATION)
   }
+
+  useEffect(() => {
+    return () => {
+      window.clearInterval(autoScrollTimerRef.current)
+      window.clearInterval(progressIntervalRef.current)
+      window.clearTimeout(resumeAutoScrollTimeoutRef.current)
+    }
+  }, [])
 
   return (
     <>
+      <div
+        style={{
+          position: 'fixed',
+          top: 0,
+          left: 0,
+          right: 0,
+          height: '3px',
+          zIndex: 500,
+          background: 'rgba(255,255,255,0.1)',
+        }}
+      >
+        <div
+          style={{
+            height: '100%',
+            width: `${progress}%`,
+            background: 'linear-gradient(to right, #C49A2A, #F0D080)',
+            transition: 'width 0.03s linear',
+            borderRadius: '0 2px 2px 0',
+          }}
+        />
+      </div>
       <div
         id="snap-scroll-container"
         ref={scrollContainerRef}
