@@ -16,6 +16,7 @@ const photos = [
 function Gallery() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [direction, setDirection] = useState(0)
+  const [flipping, setFlipping] = useState(false)
   const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.svg')
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const sectionRef = useRef(null)
@@ -36,13 +37,21 @@ function Gallery() {
   }, [])
 
   const goNext = () => {
-    setDirection(1)
-    setCurrentIndex((prev) => (prev + 1) % photos.length)
+    setFlipping(true)
+    window.setTimeout(() => {
+      setDirection(1)
+      setCurrentIndex((prev) => (prev + 1) % photos.length)
+      setFlipping(false)
+    }, 300)
   }
 
   const goPrev = () => {
-    setDirection(-1)
-    setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length)
+    setFlipping(true)
+    window.setTimeout(() => {
+      setDirection(-1)
+      setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length)
+      setFlipping(false)
+    }, 300)
   }
 
   const getCardIndex = (offset) =>
@@ -51,7 +60,6 @@ function Gallery() {
   const visibleCards = [
     { offset: -2, scale: 0.82, x: '-105%', zIndex: 2, opacity: 0.5 },
     { offset: -1, scale: 0.91, x: '-55%', zIndex: 3, opacity: 0.75 },
-    { offset: 0, scale: 1.0, x: '0%', zIndex: 5, opacity: 1 },
     { offset: 1, scale: 0.91, x: '55%', zIndex: 3, opacity: 0.75 },
     { offset: 2, scale: 0.82, x: '105%', zIndex: 2, opacity: 0.5 },
   ]
@@ -165,6 +173,7 @@ function Gallery() {
       </div>
 
       <div
+        className="gallery-scene"
         style={{
           position: 'relative',
           zIndex: 10,
@@ -173,11 +182,11 @@ function Gallery() {
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
+          perspective: '1000px',
         }}
       >
         {visibleCards.map(({ offset, scale, x, zIndex, opacity }) => {
           const index = getCardIndex(offset)
-          const isCenter = offset === 0
 
           return (
             <motion.div
@@ -195,13 +204,9 @@ function Gallery() {
                 height: 'min(280px, 42vh)',
                 borderRadius: '12px',
                 overflow: 'hidden',
-                border: isCenter
-                  ? '2px solid #C49A2A'
-                  : '1px solid rgba(196,154,42,0.4)',
-                boxShadow: isCenter
-                  ? '0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(196,154,42,0.2)'
-                  : '0 8px 20px rgba(0,0,0,0.3)',
-                cursor: offset !== 0 ? 'pointer' : 'default',
+                border: '1px solid rgba(196,154,42,0.4)',
+                boxShadow: '0 8px 20px rgba(0,0,0,0.3)',
+                cursor: 'pointer',
               }}
               onClick={() => {
                 if (offset > 0) {
@@ -215,54 +220,73 @@ function Gallery() {
                 }
               }}
             >
-              {isCenter ? (
-                <AnimatePresence mode="wait">
-                  <motion.img
-                    key={photos[index]}
-                    src={photos[index]}
-                    alt=""
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.4, ease: 'easeInOut' }}
-                    style={{
-                      width: '100%',
-                      height: '100%',
-                      objectFit: 'cover',
-                      userSelect: 'none',
-                      pointerEvents: 'none',
-                      position: 'absolute',
-                      inset: 0,
-                    }}
-                    draggable={false}
-                  />
-                </AnimatePresence>
-              ) : (
-                <img
-                  src={photos[index]}
-                  alt=""
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    userSelect: 'none',
-                    pointerEvents: 'none',
-                  }}
-                  draggable={false}
-                />
-              )}
-              {!isCenter ? (
-                <div
-                  style={{
-                    position: 'absolute',
-                    inset: 0,
-                    background: 'rgba(0,0,0,0.25)',
-                  }}
-                />
-              ) : null}
+              <img
+                src={photos[index]}
+                alt=""
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'cover',
+                  userSelect: 'none',
+                  pointerEvents: 'none',
+                }}
+                draggable={false}
+              />
+              <div
+                style={{
+                  position: 'absolute',
+                  inset: 0,
+                  background: 'rgba(0,0,0,0.25)',
+                }}
+              />
             </motion.div>
           )
         })}
+
+        <motion.div
+          key={`center-${currentIndex}`}
+          className="gallery-card"
+          animate={{
+            rotateY: flipping ? 90 : 0,
+            scale: flipping ? 0.95 : 1,
+          }}
+          transition={{ duration: 0.3, ease: 'easeInOut' }}
+          style={{
+            position: 'absolute',
+            width: 'min(200px, 52vw)',
+            height: 'min(280px, 42vh)',
+            borderRadius: '12px',
+            overflow: 'hidden',
+            border: '2px solid #C49A2A',
+            boxShadow: '0 20px 40px rgba(0,0,0,0.5), 0 0 20px rgba(196,154,42,0.2)',
+            transformStyle: 'preserve-3d',
+            backfaceVisibility: 'hidden',
+            zIndex: 5,
+          }}
+        >
+          <AnimatePresence mode="wait">
+            <motion.img
+              key={photos[currentIndex]}
+              src={photos[currentIndex]}
+              alt=""
+              initial={{ opacity: 0, rotateY: -90 }}
+              animate={{ opacity: 1, rotateY: 0 }}
+              exit={{ opacity: 0, rotateY: 90 }}
+              transition={{ duration: 0.3, ease: 'easeInOut' }}
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                userSelect: 'none',
+                pointerEvents: 'none',
+                position: 'absolute',
+                inset: 0,
+                backfaceVisibility: 'hidden',
+              }}
+              draggable={false}
+            />
+          </AnimatePresence>
+        </motion.div>
       </div>
 
       <div
@@ -299,8 +323,8 @@ function Gallery() {
             <div
               key={index}
               onClick={() => {
-                setDirection(index > currentIndex ? 1 : -1)
-                setCurrentIndex(index)
+                if (index > currentIndex) goNext()
+                else if (index < currentIndex) goPrev()
               }}
               style={{
                 width: index === currentIndex ? '20px' : '6px',
