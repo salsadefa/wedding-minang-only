@@ -12,7 +12,6 @@ import RSVP from './components/RSVP.jsx'
 import SaveTheDate from './components/SaveTheDate.jsx'
 
 const SECTION_IDS = ['anak-daro', 'marapulai', 'tanggal', 'rsvp', 'kado', 'galeri', 'closing']
-const SECTION_DURATION = 3000
 const PROGRESS_INTERVAL = 30
 
 function App() {
@@ -30,7 +29,11 @@ function App() {
   const isPausedRef = useRef(false)
   const activeSectionRef = useRef(activeSection)
 
+  const getSectionDuration = (sectionId) =>
+    sectionId === 'galeri' ? 20000 : 3000
+
   const startProgressBar = () => {
+    const sectionDuration = getSectionDuration(activeSectionRef.current)
     window.clearInterval(progressIntervalRef.current)
     setProgress(0)
     let elapsed = 0
@@ -41,16 +44,17 @@ function App() {
       }
 
       elapsed += PROGRESS_INTERVAL
-      const pct = Math.min((elapsed / SECTION_DURATION) * 100, 100)
+      const pct = Math.min((elapsed / sectionDuration) * 100, 100)
       setProgress(pct)
 
-      if (elapsed >= SECTION_DURATION) {
+      if (elapsed >= sectionDuration) {
         window.clearInterval(progressIntervalRef.current)
       }
     }, PROGRESS_INTERVAL)
   }
 
   const startAutoScroll = () => {
+    const duration = getSectionDuration(activeSectionRef.current)
     window.clearInterval(autoScrollTimerRef.current)
     autoScrollTimerRef.current = window.setInterval(() => {
       if (isManualScrollRef.current || isPausedRef.current) {
@@ -80,7 +84,7 @@ function App() {
       } else {
         window.clearInterval(autoScrollTimerRef.current)
       }
-    }, 3000)
+    }, duration)
   }
 
   useEffect(() => {
@@ -178,7 +182,7 @@ function App() {
         isManualScrollRef.current = false
         startProgressBar()
         startAutoScroll()
-      }, SECTION_DURATION)
+      }, getSectionDuration(currentSection))
     }
 
     container.addEventListener('scroll', handleScroll, { passive: true })
@@ -232,7 +236,7 @@ function App() {
     resumeAutoScrollTimeoutRef.current = window.setTimeout(() => {
       isManualScrollRef.current = false
       startAutoScroll()
-    }, SECTION_DURATION)
+    }, getSectionDuration(sectionId))
   }
 
   useEffect(() => {
