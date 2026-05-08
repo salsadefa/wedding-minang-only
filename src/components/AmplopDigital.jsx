@@ -139,14 +139,15 @@ function AmplopDigital() {
       <section
         id="kado"
         ref={sectionRef}
-        className="relative flex h-[100dvh] flex-col justify-center overflow-hidden px-8 py-6 font-cormorant"
-        style={{
-          background:
-            'linear-gradient(to bottom, #7B1A1A 0%, #5C1A0E 60%, #3B1F0E 100%)',
-          scrollSnapAlign: 'start',
-          scrollSnapStop: 'always',
-          overflow: 'hidden',
-        }}
+      className="relative flex h-[100dvh] flex-col justify-center overflow-hidden px-8 py-6 font-cormorant"
+      style={{
+        background:
+          'linear-gradient(to bottom, #7B1A1A 0%, #5C1A0E 60%, #3B1F0E 100%)',
+        scrollSnapAlign: 'start',
+        scrollSnapStop: 'always',
+        overflow: 'hidden',
+        paddingBottom: 'env(safe-area-inset-bottom)',
+      }}
       >
       <div
         className="absolute inset-0 z-0 pointer-events-none"
@@ -173,7 +174,8 @@ function AmplopDigital() {
               top: 0,
               left: 0,
               width: '100%',
-              objectFit: 'cover',
+              minHeight: '60px',
+              objectFit: 'fill',
               objectPosition: 'top',
               pointerEvents: 'none',
               zIndex: 1,
@@ -186,7 +188,7 @@ function AmplopDigital() {
             src="/flower-putih.svg"
             style={{
               position: 'absolute',
-              top: '-5px',
+              top: '0px',
               left: '14%',
               width: 'min(60px, 14vw)',
               pointerEvents: 'none',
@@ -200,7 +202,7 @@ function AmplopDigital() {
             src="/flower-putih.svg"
             style={{
               position: 'absolute',
-              top: '-5px',
+              top: '0px',
               left: '66%',
               width: 'min(60px, 14vw)',
               pointerEvents: 'none',
@@ -262,7 +264,7 @@ function AmplopDigital() {
             src="/bunga-bawah.svg"
             style={{
               position: 'absolute',
-              bottom: '60px',
+              bottom: '70px',
               left: 0,
               width: '100%',
               objectFit: 'cover',
