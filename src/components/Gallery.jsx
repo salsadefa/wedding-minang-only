@@ -12,54 +12,6 @@ const photos = [
   '/minang-9.jpg',
 ]
 
-const CARD_CONFIG = [
-  {
-    offset: -2,
-    rotateY: 45,
-    translateX: -240,
-    translateZ: -200,
-    scale: 0.7,
-    opacity: 0.4,
-    blur: 3,
-  },
-  {
-    offset: -1,
-    rotateY: 35,
-    translateX: -140,
-    translateZ: -100,
-    scale: 0.85,
-    opacity: 0.7,
-    blur: 1.5,
-  },
-  {
-    offset: 0,
-    rotateY: 0,
-    translateX: 0,
-    translateZ: 0,
-    scale: 1.0,
-    opacity: 1,
-    blur: 0,
-  },
-  {
-    offset: 1,
-    rotateY: -35,
-    translateX: 140,
-    translateZ: -100,
-    scale: 0.85,
-    opacity: 0.7,
-    blur: 1.5,
-  },
-  {
-    offset: 2,
-    rotateY: -45,
-    translateX: 240,
-    translateZ: -200,
-    scale: 0.7,
-    opacity: 0.4,
-    blur: 3,
-  },
-]
-
 function Gallery() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.svg')
@@ -81,9 +33,36 @@ function Gallery() {
     return () => window.removeEventListener('resize', update)
   }, [])
 
-  const goNext = () => setCurrentIndex((prev) => (prev + 1) % photos.length)
-  const goPrev = () =>
-    setCurrentIndex((prev) => (prev - 1 + photos.length) % photos.length)
+  const goNext = () =>
+    setCurrentIndex((prev) => Math.min(prev + 1, photos.length - 1))
+  const goPrev = () => setCurrentIndex((prev) => Math.max(prev - 1, 0))
+
+  const getCardStyle = (index) => {
+    const offset = index - currentIndex
+    const absOffset = Math.abs(offset)
+
+    if (absOffset > 3) {
+      return { opacity: 0, pointerEvents: 'none', zIndex: -10 }
+    }
+
+    const translateX = offset * 120
+    const scale = 1 - 0.2 * absOffset
+    const rotateY = offset > 0 ? -1 : offset < 0 ? 1 : 0
+    const blur = absOffset > 0 ? 5 : 0
+    const opacity = absOffset > 2 ? 0 : absOffset > 0 ? 0.6 : 1
+    const zIndex = absOffset === 0 ? 1 : -absOffset
+
+    return {
+      transform:
+        absOffset === 0
+          ? 'none'
+          : `translateX(${translateX}px) scale(${scale}) perspective(16px) rotateY(${rotateY}deg)`,
+      zIndex,
+      filter: blur > 0 ? `blur(${blur}px)` : 'none',
+      opacity,
+      transition: 'all 0.5s ease',
+    }
+  }
 
   const handleTouchStart = (event) => setDragStart(event.touches[0].clientX)
 
@@ -228,81 +207,54 @@ function Gallery() {
           position: 'relative',
           zIndex: 10,
           width: '100%',
-          height: 'min(300px, 44vh)',
-          perspective: '1000px',
-          perspectiveOrigin: 'center center',
+          height: 'min(320px, 46vh)',
+          overflow: 'hidden',
           display: 'flex',
-          alignItems: 'center',
+          alignItems: 'flex-start',
           justifyContent: 'center',
         }}
       >
-        {CARD_CONFIG.map(
-          ({
-            offset,
-            rotateY,
-            translateX,
-            translateZ,
-            scale,
-            opacity,
-            blur,
-          }) => {
-            const index = (currentIndex + offset + photos.length) % photos.length
-            const isCenter = offset === 0
-
-            return (
-              <div
-                key={`card-${offset}`}
-                onClick={() => {
-                  if (offset > 0) goNext()
-                  if (offset < 0) goPrev()
-                }}
-                style={{
-                  position: 'absolute',
-                  width: 'min(180px, 46vw)',
-                  height: 'min(260px, 40vh)',
-                  borderRadius: '12px',
-                  overflow: 'hidden',
-                  border: isCenter
-                    ? '2px solid #C49A2A'
-                    : '1px solid rgba(196,154,42,0.3)',
-                  boxShadow: isCenter
-                    ? '0 25px 50px rgba(0,0,0,0.5), 0 0 30px rgba(196,154,42,0.15)'
-                    : '0 8px 24px rgba(0,0,0,0.4)',
-                  transform: `translateX(${translateX}px) translateZ(${translateZ}px) rotateY(${rotateY}deg) scale(${scale})`,
-                  opacity,
-                  filter: blur > 0 ? `blur(${blur}px)` : 'none',
-                  transition: 'all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
-                  cursor: offset !== 0 ? 'pointer' : 'grab',
-                  zIndex: isCenter ? 5 : 3 - Math.abs(offset),
-                  transformStyle: 'preserve-3d',
-                }}
-              >
-                <img
-                  src={photos[index]}
-                  alt=""
-                  style={{
-                    width: '100%',
-                    height: '100%',
-                    objectFit: 'cover',
-                    pointerEvents: 'none',
-                    userSelect: 'none',
-                    transition: 'opacity 0.4s ease',
-                  }}
-                  draggable={false}
-                />
-                {!isCenter ? (
-                  <div
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      background: 'rgba(0,0,0,0.15)',
-                    }}
-                  />
-                ) : null}
-              </div>
-            )
-          },
-        )}
+        {photos.map((src, index) => (
+          <div
+            key={index}
+            onClick={() => {
+              if (index > currentIndex) goNext()
+              else if (index < currentIndex) goPrev()
+            }}
+            style={{
+              position: 'absolute',
+              width: 'min(180px, 46vw)',
+              height: 'min(280px, 42vh)',
+              borderRadius: '12px',
+              overflow: 'hidden',
+              border:
+                index === currentIndex
+                  ? '2px solid #C49A2A'
+                  : '1px solid rgba(196,154,42,0.3)',
+              boxShadow:
+                index === currentIndex
+                  ? '0 25px 50px rgba(0,0,0,0.5)'
+                  : '0 8px 24px rgba(0,0,0,0.3)',
+              cursor: index !== currentIndex ? 'pointer' : 'default',
+              left: 'calc(50% - min(90px, 23vw))',
+              top: 0,
+              ...getCardStyle(index),
+            }}
+          >
+            <img
+              src={src}
+              alt=""
+              style={{
+                width: '100%',
+                height: '100%',
+                objectFit: 'cover',
+                pointerEvents: 'none',
+                userSelect: 'none',
+              }}
+              draggable={false}
+            />
+          </div>
+        ))}
       </div>
 
       <div
