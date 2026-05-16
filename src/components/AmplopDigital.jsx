@@ -334,25 +334,6 @@ function AmplopDigital() {
           >
             <button
               type="button"
-              onClick={() => setShowAngpao(true)}
-              style={{
-                background: 'transparent',
-                border: '1px solid #C49A2A',
-                borderRadius: '8px',
-                padding: '14px 24px',
-                color: '#C49A2A',
-                fontFamily: 'Lora',
-                fontSize: '16px',
-                letterSpacing: '0.05em',
-                cursor: 'pointer',
-                width: '100%',
-              }}
-            >
-              💝 Kirim Angpao
-            </button>
-
-            <button
-              type="button"
               onClick={() => setShowKado(true)}
               style={{
                 background: 'transparent',
@@ -368,6 +349,25 @@ function AmplopDigital() {
               }}
             >
               🎁 Kirim Kado
+            </button>
+
+            <button
+              type="button"
+              onClick={() => setShowAngpao(true)}
+              style={{
+                background: 'transparent',
+                border: '1px solid #C49A2A',
+                borderRadius: '8px',
+                padding: '14px 24px',
+                color: '#C49A2A',
+                fontFamily: 'Lora',
+                fontSize: '16px',
+                letterSpacing: '0.05em',
+                cursor: 'pointer',
+                width: '100%',
+              }}
+            >
+              💝 Amplop Online
             </button>
           </motion.div>
 
@@ -420,7 +420,7 @@ function AmplopDigital() {
                   marginBottom: '20px',
                 }}
               >
-                Kirim Angpao
+                Amplop Online
               </h3>
 
               <Divider />
