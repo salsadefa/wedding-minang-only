@@ -197,7 +197,7 @@ function SaveTheDate() {
               >
                 <span
                   style={{
-                    fontFamily: 'Lora, serif',
+                    fontFamily: 'Hurricane, cursive',
                     fontSize: 'clamp(36px, 10vw, 56px)',
                     fontWeight: '400',
                     fontStyle: 'italic',
