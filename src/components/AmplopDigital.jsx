@@ -292,16 +292,22 @@ function AmplopDigital() {
               className="mt-2 text-ivory"
               style={{ fontSize: 'clamp(16px, 4vw, 20px)' }}
             >
-              Doa dan kehadiran Anda sudah lebih dari cukup
+              Kehadiran dan doa restu dari Bapak/Ibu/Sdr merupakan kebahagiaan
+              yang tak ternilai bagi kami.
             </h2>
 
-          <p
-            className="mt-2 text-[13px] text-ivory opacity-70"
-            style={{ textAlign: 'center', width: '100%', maxWidth: '280px', margin: '0.5rem auto 0' }}
-          >
-            Namun jika Anda ingin memberikan tanda kasih, kami dengan senang hati
-            menerimanya
-          </p>
+            <p
+              className="mt-2 text-[13px] text-ivory opacity-70"
+              style={{
+                textAlign: 'center',
+                width: '100%',
+                maxWidth: '280px',
+                margin: '0.5rem auto 0',
+              }}
+            >
+              Namun apabila memberi merupakan cara untuk berbagi bahagia, kami
+              menerimanya dengan penuh syukur dan terima kasih.
+            </p>
           </motion.div>
 
           <motion.div
