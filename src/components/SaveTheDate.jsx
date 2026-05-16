@@ -14,6 +14,84 @@ function getTimeLeft() {
   return { days, hours, minutes, seconds }
 }
 
+function CircleTimer({ value, max, label }) {
+  const size = 80
+  const strokeWidth = 3
+  const radius = (size - strokeWidth) / 2
+  const circumference = 2 * Math.PI * radius
+  const progress = value / max
+  const strokeDashoffset = circumference * (1 - progress)
+
+  return (
+    <div
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        gap: '6px',
+      }}
+    >
+      <div style={{ position: 'relative', width: size, height: size }}>
+        <svg width={size} height={size} style={{ transform: 'rotate(-90deg)' }}>
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            stroke="rgba(196,154,42,0.2)"
+            strokeWidth={strokeWidth}
+          />
+          <circle
+            cx={size / 2}
+            cy={size / 2}
+            r={radius}
+            fill="none"
+            stroke="#C49A2A"
+            strokeWidth={strokeWidth}
+            strokeDasharray={circumference}
+            strokeDashoffset={strokeDashoffset}
+            strokeLinecap="round"
+            style={{ transition: 'stroke-dashoffset 0.5s ease' }}
+          />
+        </svg>
+        <div
+          style={{
+            position: 'absolute',
+            inset: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <span
+            style={{
+              fontFamily: 'Hurricane, cursive',
+              fontSize: 'clamp(28px, 7vw, 36px)',
+              color: '#F5E6C8',
+              lineHeight: 1,
+              textShadow: '0 0 20px rgba(196,154,42,0.5)',
+            }}
+          >
+            {String(value).padStart(2, '0')}
+          </span>
+        </div>
+      </div>
+      <span
+        style={{
+          fontFamily: 'Lora, serif',
+          fontSize: '9px',
+          letterSpacing: '0.2em',
+          textTransform: 'uppercase',
+          color: '#C49A2A',
+          fontWeight: '400',
+        }}
+      >
+        {label}
+      </span>
+    </div>
+  )
+}
+
 function SaveTheDate() {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.4 })
@@ -51,13 +129,6 @@ function SaveTheDate() {
 
     return () => window.removeEventListener('resize', update)
   }, [])
-
-  const timerItems = [
-    { value: timeLeft.days, label: 'Hari' },
-    { value: timeLeft.hours, label: 'Jam' },
-    { value: timeLeft.minutes, label: 'Menit' },
-    { value: timeLeft.seconds, label: 'Detik' },
-  ]
 
   return (
     <section
@@ -175,71 +246,17 @@ function SaveTheDate() {
           transition={{ duration: 0.5, delay: 0.5, ease: 'easeOut' }}
           style={{
             display: 'flex',
-            gap: '0',
+            gap: '12px',
             alignItems: 'center',
             justifyContent: 'center',
             width: '100%',
             marginTop: '0.5rem',
           }}
         >
-          {timerItems.map((unit, index) => (
-            <div
-              key={unit.label}
-              style={{ display: 'flex', alignItems: 'center' }}
-            >
-              <div
-                style={{
-                  display: 'flex',
-                  flexDirection: 'column',
-                  alignItems: 'center',
-                  padding: '0 12px',
-                }}
-              >
-                <span
-                  style={{
-                    fontFamily: 'Hurricane, cursive',
-                    fontSize: 'clamp(36px, 10vw, 56px)',
-                    fontWeight: '400',
-                    fontStyle: 'italic',
-                    color: '#F5E6C8',
-                    lineHeight: 1,
-                    textShadow: '0 0 30px rgba(196,154,42,0.4)',
-                    letterSpacing: '-0.02em',
-                  }}
-                >
-                  {String(unit.value).padStart(2, '0')}
-                </span>
-                <span
-                  style={{
-                    fontFamily: 'Lora, serif',
-                    fontSize: '10px',
-                    letterSpacing: '0.2em',
-                    textTransform: 'uppercase',
-                    color: '#C49A2A',
-                    marginTop: '6px',
-                    fontWeight: '400',
-                  }}
-                >
-                  {unit.label}
-                </span>
-              </div>
-              {index < 3 ? (
-                <span
-                  style={{
-                    fontFamily: 'Lora, serif',
-                    fontSize: 'clamp(28px, 8vw, 44px)',
-                    fontStyle: 'italic',
-                    color: '#C49A2A',
-                    opacity: 0.6,
-                    lineHeight: 1,
-                    marginBottom: '16px',
-                  }}
-                >
-                  ◆
-                </span>
-              ) : null}
-            </div>
-          ))}
+          <CircleTimer value={timeLeft.days} max={365} label="Hari" />
+          <CircleTimer value={timeLeft.hours} max={24} label="Jam" />
+          <CircleTimer value={timeLeft.minutes} max={60} label="Menit" />
+          <CircleTimer value={timeLeft.seconds} max={60} label="Detik" />
         </motion.div>
 
         <div className="mt-[0.5rem] flex w-full flex-col items-center">
