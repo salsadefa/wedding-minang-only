@@ -172,11 +172,13 @@ function Closing() {
           minHeight: '100dvh',
           gap: '0.3rem',
           alignItems: 'center',
+          justifyContent: 'flex-end',
           width: '100%',
           maxWidth: 'none',
           margin: 0,
           marginTop: '15px',
-          paddingBottom: '80px',
+          paddingTop: '20px',
+          paddingBottom: 'calc(90px + env(safe-area-inset-bottom))',
         }}
       >
         <div
