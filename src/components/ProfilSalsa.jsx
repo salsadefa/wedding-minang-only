@@ -22,7 +22,12 @@ function ProfilSalsa() {
       id="anak-daro"
       ref={sectionRef}
       className="relative isolate flex h-[100dvh] items-center justify-center bg-maroon px-8 py-4 font-cormorant"
-      style={{ scrollSnapAlign: 'start', scrollSnapStop: 'always', overflow: 'visible' }}
+      style={{
+        scrollSnapAlign: 'start',
+        scrollSnapStop: 'always',
+        overflow: 'visible',
+        paddingBottom: 'calc(70px + env(safe-area-inset-bottom))',
+      }}
     >
       <div className="absolute inset-0 z-0 bg-maroon" />
 

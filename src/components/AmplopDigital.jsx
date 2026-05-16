@@ -146,7 +146,7 @@ function AmplopDigital() {
         scrollSnapAlign: 'start',
         scrollSnapStop: 'always',
         overflow: 'hidden',
-        paddingBottom: 'env(safe-area-inset-bottom)',
+        paddingBottom: 'calc(70px + env(safe-area-inset-bottom))',
       }}
       >
       <div

@@ -141,6 +141,7 @@ function SaveTheDate() {
         scrollSnapAlign: 'start',
         scrollSnapStop: 'always',
         overflow: 'hidden',
+        paddingBottom: 'calc(70px + env(safe-area-inset-bottom))',
       }}
     >
       <div

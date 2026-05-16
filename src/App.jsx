@@ -289,7 +289,7 @@ function App() {
               paddingRight: 0,
               overflowY: 'scroll',
               scrollSnapType: 'y mandatory',
-              paddingBottom: '70px',
+              paddingBottom: 'calc(70px + env(safe-area-inset-bottom))',
             }}
           >
             <ProfilSalsa />

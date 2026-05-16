@@ -108,6 +108,7 @@ function Gallery() {
         fontFamily: 'Lora, serif',
         gap: '1rem',
         userSelect: 'none',
+        paddingBottom: 'calc(70px + env(safe-area-inset-bottom))',
       }}
       onTouchStart={handleTouchStart}
       onTouchEnd={handleTouchEnd}

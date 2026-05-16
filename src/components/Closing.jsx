@@ -76,6 +76,7 @@ function Closing() {
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
+        paddingBottom: 'calc(70px + env(safe-area-inset-bottom))',
       }}
     >
       <div
