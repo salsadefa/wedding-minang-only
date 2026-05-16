@@ -131,7 +131,7 @@ function RSVP() {
       id="rsvp"
       data-no-autoscroll="true"
       ref={sectionRef}
-      className="relative flex h-[100dvh] flex-col justify-center overflow-hidden px-5 py-4 font-cormorant"
+      className="relative flex h-[100dvh] flex-col justify-center overflow-hidden px-4 py-3 font-cormorant"
       style={{
         background:
           'linear-gradient(to bottom, #7B1A1A 0%, #5C1A0E 60%, #3B1F0E 100%)',
@@ -219,11 +219,11 @@ function RSVP() {
                 konfirmasi kehadiran
               </p>
 
-              <h2 className="mt-2 text-ivory" style={{ fontSize: 'clamp(14px, 3.5vw, 18px)' }}>
+              <h2 className="mt-2 text-ivory" style={{ fontSize: 'clamp(13px, 3vw, 16px)' }}>
                 Kehadiran Anda adalah kebahagiaan kami
               </h2>
 
-              <p className="mt-2 text-[12px] text-gold">
+              <p className="mt-2 text-[11px] text-gold">
                 Mohon konfirmasi sebelum 14 Juni 2026
               </p>
             </motion.div>
@@ -232,19 +232,19 @@ function RSVP() {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : { opacity: 0 }}
               transition={{ duration: 0.5, delay: 0.3, ease: 'easeOut' }}
-              className="relative my-2 h-4 w-20"
+              className="relative my-1 h-4 w-20"
             >
               <div className="absolute left-0 top-1/2 h-px w-full -translate-y-1/2 bg-gold" />
               <div className="absolute left-1/2 top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-gold bg-maroon" />
             </motion.div>
 
-            <div className="flex w-full max-w-md flex-col gap-[0.4rem] text-left">
+            <div className="flex w-full max-w-md flex-col gap-[0.3rem] text-left">
               <motion.div
                 initial={{ x: -30, opacity: 0 }}
                 animate={isInView ? { x: 0, opacity: 1 } : { x: -30, opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.4, ease: 'easeOut' }}
               >
-                <label className="mb-2 block text-[11px] uppercase tracking-[0.3em] text-ivory">
+                <label className="mb-2 block text-[10px] uppercase tracking-[0.3em] text-ivory">
                   Nama Lengkap
                 </label>
                 <input
@@ -257,7 +257,7 @@ function RSVP() {
                     }
                   }}
                   placeholder="Masukkan nama lengkap"
-                  className="w-full rounded-[8px] border border-gold bg-[#8C2020] px-[10px] py-[7px] text-[14px] text-ivory placeholder:text-ivory placeholder:opacity-50 focus:outline-none"
+                  className="w-full rounded-[8px] border border-gold bg-[#8C2020] px-[10px] py-[6px] text-[13px] text-ivory placeholder:text-ivory placeholder:opacity-50 focus:outline-none"
                 />
               </motion.div>
 
@@ -266,7 +266,7 @@ function RSVP() {
                 animate={isInView ? { x: 0, opacity: 1 } : { x: -30, opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.55, ease: 'easeOut' }}
               >
-                <label className="mb-2 block text-[11px] uppercase tracking-[0.3em] text-ivory">
+                <label className="mb-2 block text-[10px] uppercase tracking-[0.3em] text-ivory">
                   Nomor HP
                 </label>
                 <input
@@ -279,7 +279,7 @@ function RSVP() {
                     }
                   }}
                   placeholder="Masukkan nomor HP"
-                  className="w-full rounded-[8px] border border-gold bg-[#8C2020] px-[10px] py-[7px] text-[14px] text-ivory placeholder:text-ivory placeholder:opacity-50 focus:outline-none"
+                  className="w-full rounded-[8px] border border-gold bg-[#8C2020] px-[10px] py-[6px] text-[13px] text-ivory placeholder:text-ivory placeholder:opacity-50 focus:outline-none"
                 />
               </motion.div>
 
@@ -288,7 +288,7 @@ function RSVP() {
                 animate={isInView ? { x: 0, opacity: 1 } : { x: -30, opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.7, ease: 'easeOut' }}
               >
-                <label className="mb-2 block text-[11px] uppercase tracking-[0.3em] text-ivory">
+                <label className="mb-2 block text-[10px] uppercase tracking-[0.3em] text-ivory">
                   Konfirmasi Kehadiran
                 </label>
                 <div className="flex gap-2">
@@ -300,7 +300,7 @@ function RSVP() {
                         setErrorMessage('')
                       }
                     }}
-                    className={`w-1/2 rounded-full border px-3 py-1.5 text-center text-[14px] transition-colors ${
+                    className={`w-1/2 rounded-full border px-2 py-1 text-center text-[13px] transition-colors ${
                       attendance === 'Hadir'
                         ? 'border-gold bg-gold font-medium text-maroon'
                         : 'border-gold bg-transparent text-gold'
@@ -316,7 +316,7 @@ function RSVP() {
                         setErrorMessage('')
                       }
                     }}
-                    className={`w-1/2 rounded-full border px-3 py-1.5 text-center text-[14px] transition-colors ${
+                    className={`w-1/2 rounded-full border px-2 py-1 text-center text-[13px] transition-colors ${
                       attendance === 'Tidak Hadir'
                         ? 'border-gold bg-gold font-medium text-maroon'
                         : 'border-gold bg-transparent text-gold'
@@ -332,24 +332,24 @@ function RSVP() {
                 animate={isInView ? { x: 0, opacity: 1 } : { x: -30, opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.85, ease: 'easeOut' }}
               >
-                <label className="mb-2 block text-[11px] uppercase tracking-[0.3em] text-ivory">
+                <label className="mb-2 block text-[10px] uppercase tracking-[0.3em] text-ivory">
                   Jumlah Tamu
                 </label>
-                <div className="flex items-center justify-center gap-4 rounded-[8px] border border-gold bg-[#8C2020] px-4 py-3">
+                <div className="flex items-center justify-center gap-4 rounded-[8px] border border-gold bg-[#8C2020] px-4 py-2">
                   <button
                     type="button"
                     onClick={() => setGuestCount((count) => Math.max(1, count - 1))}
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-gold bg-transparent text-gold"
+                    className="flex h-7 w-7 items-center justify-center rounded-full border border-gold bg-transparent text-gold"
                   >
                     -
                   </button>
-                  <span className="min-w-10 text-center text-[16px] text-ivory">
+                  <span className="min-w-10 text-center text-[15px] text-ivory">
                     {guestCount}
                   </span>
                   <button
                     type="button"
                     onClick={() => setGuestCount((count) => count + 1)}
-                    className="flex h-8 w-8 items-center justify-center rounded-full border border-gold bg-transparent text-gold"
+                    className="flex h-7 w-7 items-center justify-center rounded-full border border-gold bg-transparent text-gold"
                   >
                     +
                   </button>
@@ -361,7 +361,7 @@ function RSVP() {
                 animate={isInView ? { x: 0, opacity: 1 } : { x: -30, opacity: 0 }}
                 transition={{ duration: 0.5, delay: 0.95, ease: 'easeOut' }}
               >
-                <label className="mb-2 block text-[11px] uppercase tracking-[0.3em] text-ivory">
+                <label className="mb-2 block text-[10px] uppercase tracking-[0.3em] text-ivory">
                   Pesan untuk Pengantin
                 </label>
                 <textarea
@@ -377,12 +377,12 @@ function RSVP() {
                     background: '#8C2020',
                     border: '1px solid #C49A2A',
                     borderRadius: '8px',
-                    padding: '7px 10px',
+                    padding: '6px 10px',
                     color: '#F5E6C8',
                     fontFamily: 'Lora',
-                    fontSize: '14px',
+                    fontSize: '13px',
                     width: '100%',
-                    height: '85px',
+                    height: '70px',
                     resize: 'none',
                   }}
                   className="placeholder:text-ivory placeholder:opacity-50 focus:outline-none"
@@ -395,7 +395,7 @@ function RSVP() {
                 animate={isInView ? { y: 0, opacity: 1 } : { y: 20, opacity: 0 }}
                 transition={{ duration: 0.5, delay: 1.0, ease: 'easeOut' }}
                 onClick={handleSubmit}
-                className="mt-2 w-full rounded-[8px] bg-gold px-4 py-2.5 text-[15px] font-medium text-maroon"
+                className="mt-1 w-full rounded-[8px] bg-gold px-4 py-2 text-[14px] font-medium text-maroon"
               >
                 Kirim Konfirmasi
               </motion.button>
@@ -410,12 +410,12 @@ function RSVP() {
             </div>
           </div>
         ) : (
-          <div className="flex w-full h-full flex-col items-center justify-center gap-4">
+          <div className="flex w-full h-full flex-col items-center justify-center gap-2">
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="flex flex-col items-center gap-3 text-center"
+              className="flex flex-col items-center gap-2 text-center"
             >
               <p className="text-[12px] uppercase tracking-[0.45em] text-ivory">Terima Kasih</p>
               <h2 className="text-ivory" style={{ fontSize: 'clamp(18px, 4vw, 24px)' }}>
@@ -430,17 +430,17 @@ function RSVP() {
 
             <p className="text-[11px] uppercase tracking-[0.3em] text-gold">Pesan &amp; Doa</p>
 
-            <div className="w-full max-w-md flex flex-col gap-3 overflow-y-auto" style={{ maxHeight: 'calc(100dvh - 280px)' }}>
+            <div className="w-full max-w-md flex flex-col gap-3 overflow-y-auto" style={{ maxHeight: 'calc(100dvh - 240px)' }}>
               {wishes.map((item, index) => (
                 <motion.div
                   key={`${item.nama}-${index}`}
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ duration: 0.4, delay: index * 0.1 }}
-                  className="rounded-[8px] border border-gold bg-[#8C2020] p-4 text-left"
+                  className="rounded-[8px] border border-gold bg-[#8C2020] p-3 text-left"
                 >
-                  <p className="text-[11px] uppercase tracking-[0.3em] text-gold">{item.nama}</p>
-                  <p className="mt-1 text-[14px] leading-relaxed text-ivory">{item.pesan}</p>
+                  <p className="text-[10px] uppercase tracking-[0.3em] text-gold">{item.nama}</p>
+                  <p className="mt-1 text-[13px] leading-relaxed text-ivory">{item.pesan}</p>
                 </motion.div>
               ))}
             </div>
@@ -448,7 +448,7 @@ function RSVP() {
             <button
               type="button"
               onClick={() => setHasSubmitted(false)}
-              className="text-[12px] text-gold underline opacity-70 mt-2"
+              className="mt-1 text-[12px] text-gold underline opacity-70"
             >
               Edit konfirmasi
             </button>
