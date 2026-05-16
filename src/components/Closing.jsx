@@ -75,7 +75,8 @@ function Closing() {
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
-        justifyContent: 'flex-end',
+        justifyContent: 'center',
+        paddingTop: '8px',
         paddingBottom: 'calc(70px + env(safe-area-inset-bottom))',
       }}
     >
@@ -167,9 +168,9 @@ function Closing() {
       ))}
 
       <div
-        className="relative z-[2] flex w-full flex-col items-center justify-center px-8 py-4 text-center"
+        className="relative z-[2] flex w-full flex-col items-center justify-center px-8 py-2 text-center"
         style={{
-          gap: '0.3rem',
+          gap: '0.2rem',
           alignItems: 'center',
           justifyContent: 'center',
           width: '100%',
@@ -177,7 +178,6 @@ function Closing() {
           margin: 0,
           marginTop: '15px',
           paddingTop: '20px',
-          paddingBottom: 'calc(90px + env(safe-area-inset-bottom))',
         }}
       >
         <div
@@ -214,10 +214,10 @@ function Closing() {
               animate={isInView ? { opacity: 1, y: 0 } : { opacity: 0, y: 20 }}
               transition={{ delay: 0.4, duration: 0.8, ease: 'easeOut' }}
               style={{
-                width: '160px',
-                height: '210px',
+                width: '170px',
+                height: '220px',
                 clipPath:
-                  "path('M 80,0 C 120,0 160,40 160,80 L 160,210 L 0,210 L 0,80 C 0,40 40,0 80,0 Z')",
+                  "path('M 85,0 C 127,0 170,42 170,85 L 170,220 L 0,220 L 0,85 C 0,42 42,0 85,0 Z')",
                 overflow: 'hidden',
                 margin: '0 auto',
                 marginTop: '12px',
@@ -249,7 +249,7 @@ function Closing() {
           <h2
             style={{
               fontFamily: 'Lora',
-              fontSize: 'clamp(20px, 4vw, 26px)',
+              fontSize: 'clamp(20px, 4.5vw, 26px)',
               fontWeight: 500,
               color: '#F5E6C8',
               textAlign: 'center',
@@ -317,7 +317,7 @@ function Closing() {
           <p
             style={{
               fontFamily: 'Lora',
-              fontSize: 'clamp(16px, 3.5vw, 20px)',
+              fontSize: 'clamp(14px, 3vw, 18px)',
               fontWeight: '600',
               letterSpacing: '0.05em',
               background: 'linear-gradient(135deg, #C49A2A 0%, #F0D080 50%, #C49A2A 100%)',
