@@ -93,9 +93,9 @@ function App() {
   useEffect(() => {
     const lowCPU =
       typeof navigator.hardwareConcurrency === 'number' &&
-      navigator.hardwareConcurrency <= 4
+      navigator.hardwareConcurrency <= 1
     const lowMemory =
-      typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 2
+      typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 0.5
     const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
     setIsLowEnd(lowCPU || lowMemory || prefersReducedMotion)
