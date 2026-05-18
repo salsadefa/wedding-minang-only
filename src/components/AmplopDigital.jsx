@@ -80,7 +80,7 @@ function Divider() {
   )
 }
 
-function AmplopDigital() {
+function AmplopDigital({ isLowEnd = false }) {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.4 })
   const [showAngpao, setShowAngpao] = useState(false)
@@ -165,10 +165,11 @@ function AmplopDigital() {
         }}
       />
 
-      {isMobile && (
+      {isMobile && !isLowEnd && (
         <>
           <img
             src="/bunga-atas.svg"
+            loading="lazy"
             style={{
               position: 'absolute',
               top: 0,
@@ -186,6 +187,7 @@ function AmplopDigital() {
 
           <img
             src="/flower-putih.svg"
+            loading="lazy"
             style={{
               position: 'absolute',
               top: '0px',
@@ -201,6 +203,7 @@ function AmplopDigital() {
 
           <img
             src="/flower-putih.svg"
+            loading="lazy"
             style={{
               position: 'absolute',
               top: '0px',
@@ -223,6 +226,7 @@ function AmplopDigital() {
             <img
               key={`batik-left-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 left: '8px',
@@ -247,6 +251,7 @@ function AmplopDigital() {
             <img
               key={`batik-right-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 right: '8px',
@@ -264,6 +269,7 @@ function AmplopDigital() {
 
           <img
             src="/bunga-bawah.svg"
+            loading="lazy"
             style={{
               position: 'absolute',
               bottom: 'calc(60px + env(safe-area-inset-bottom))',

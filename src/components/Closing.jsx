@@ -13,7 +13,7 @@ function Divider({ marginTop = '1rem', marginBottom = '0' }) {
   )
 }
 
-function Closing() {
+function Closing({ isLowEnd = false }) {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 })
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
@@ -90,7 +90,7 @@ function Closing() {
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
           animation:
-            songketSrc === '/songket-padang-mobile.svg'
+            !isLowEnd && songketSrc === '/songket-padang-mobile.svg'
               ? 'breathe 6s ease-in-out infinite'
               : 'none',
           transformOrigin: 'center center',
@@ -108,6 +108,7 @@ function Closing() {
             <img
               key={`batik-left-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 left: '8px',
@@ -131,6 +132,7 @@ function Closing() {
             <img
               key={`batik-right-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 right: '8px',
@@ -148,24 +150,26 @@ function Closing() {
         </>
       )}
 
-      {particles.map((particle) => (
-        <div
-          key={particle.id}
-          style={{
-            position: 'absolute',
-            left: particle.left,
-            bottom: 0,
-            width: `${particle.size}px`,
-            height: `${particle.size}px`,
-            borderRadius: '50%',
-            background: '#C49A2A',
-            animation: `floatUp ${particle.duration}s ${particle.delay}s linear infinite`,
-            opacity: particle.opacity,
-            zIndex: 1,
-            pointerEvents: 'none',
-          }}
-        />
-      ))}
+      {!isLowEnd
+        ? particles.map((particle) => (
+            <div
+              key={particle.id}
+              style={{
+                position: 'absolute',
+                left: particle.left,
+                bottom: 0,
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+                borderRadius: '50%',
+                background: '#C49A2A',
+                animation: `floatUp ${particle.duration}s ${particle.delay}s linear infinite`,
+                opacity: particle.opacity,
+                zIndex: 1,
+                pointerEvents: 'none',
+              }}
+            />
+          ))
+        : null}
 
       <div
         className="relative z-[2] flex w-full flex-col items-center justify-center px-8 py-2 text-center"
@@ -193,6 +197,7 @@ function Closing() {
             <motion.img
               src="/rumah-gadang.svg"
               alt="Rumah Gadang"
+              loading="lazy"
               initial={{ scale: 0.9, opacity: 0 }}
               animate={isInView ? { scale: 1, opacity: 1 } : { scale: 0.9, opacity: 0 }}
               transition={{ delay: 0.1, duration: 0.8, ease: 'easeOut' }}
@@ -229,6 +234,7 @@ function Closing() {
               <img
                 src="/latar-rg.png"
                 alt="Salsa dan Arkan"
+                loading="lazy"
                 style={{
                   width: '100%',
                   height: '100%',

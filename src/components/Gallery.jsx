@@ -12,7 +12,7 @@ const photos = [
   '/minang-9.jpg',
 ]
 
-function Gallery() {
+function Gallery({ isLowEnd = false }) {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.svg')
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
@@ -127,7 +127,7 @@ function Gallery() {
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
           animation:
-            songketSrc === '/songket-padang-mobile.svg'
+            !isLowEnd && songketSrc === '/songket-padang-mobile.svg'
               ? 'breathe 6s ease-in-out infinite'
               : 'none',
           transformOrigin: 'center center',
@@ -143,6 +143,7 @@ function Gallery() {
             <img
               key={`bl-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 left: '8px',
@@ -163,6 +164,7 @@ function Gallery() {
             <img
               key={`br-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 right: '8px',
@@ -245,6 +247,7 @@ function Gallery() {
             <img
               src={src}
               alt=""
+              loading="lazy"
               style={{
                 width: '100%',
                 height: '100%',

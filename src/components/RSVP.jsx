@@ -11,7 +11,7 @@ function Divider() {
   )
 }
 
-function RSVP() {
+function RSVP({ isLowEnd = false }) {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.4 })
   const [hasSubmitted, setHasSubmitted] = useState(false)
@@ -172,7 +172,7 @@ function RSVP() {
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
           animation:
-            songketSrc === '/songket-padang-mobile.svg'
+            !isLowEnd && songketSrc === '/songket-padang-mobile.svg'
               ? 'breathe 6s ease-in-out infinite'
               : 'none',
           transformOrigin: 'center center',
@@ -190,6 +190,7 @@ function RSVP() {
             <img
               key={`batik-left-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 left: '8px',
@@ -213,6 +214,7 @@ function RSVP() {
             <img
               key={`batik-right-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 right: '8px',

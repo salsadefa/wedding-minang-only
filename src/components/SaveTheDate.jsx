@@ -92,7 +92,7 @@ function CircleTimer({ value, max, label }) {
   )
 }
 
-function SaveTheDate() {
+function SaveTheDate({ isLowEnd = false }) {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.4 })
   const [timeLeft, setTimeLeft] = useState(() => getTimeLeft())
@@ -153,7 +153,7 @@ function SaveTheDate() {
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
           animation:
-            songketSrc === '/songket-padang-mobile.svg'
+            !isLowEnd && songketSrc === '/songket-padang-mobile.svg'
               ? 'breathe 6s ease-in-out infinite'
               : 'none',
           transformOrigin: 'center center',
@@ -171,6 +171,7 @@ function SaveTheDate() {
             <img
               key={`batik-left-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 left: '8px',
@@ -194,6 +195,7 @@ function SaveTheDate() {
             <img
               key={`batik-right-${index}`}
               src={item.src}
+              loading="lazy"
               style={{
                 position: 'absolute',
                 right: '8px',

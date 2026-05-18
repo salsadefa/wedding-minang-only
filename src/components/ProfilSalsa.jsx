@@ -1,7 +1,7 @@
 import { useMemo, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
-function ProfilSalsa() {
+function ProfilSalsa({ isLowEnd = false }) {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.5 })
   const particles = useMemo(
@@ -42,25 +42,27 @@ function ProfilSalsa() {
         }}
       />
 
-      <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none', overflow: 'hidden' }}>
-        {particles.map((particle) => (
-          <div
-            key={particle.id}
-            style={{
-              position: 'absolute',
-              left: particle.left,
-              bottom: 0,
-              width: `${particle.size}px`,
-              height: `${particle.size}px`,
-              borderRadius: '50%',
-              background: '#C49A2A',
-              animation: `floatUp ${particle.duration}s ${particle.delay}s linear infinite`,
-              opacity: particle.opacity,
-              pointerEvents: 'none',
-            }}
-          />
-        ))}
-      </div>
+      {!isLowEnd ? (
+        <div style={{ position: 'absolute', inset: 0, zIndex: 1, pointerEvents: 'none', overflow: 'hidden' }}>
+          {particles.map((particle) => (
+            <div
+              key={particle.id}
+              style={{
+                position: 'absolute',
+                left: particle.left,
+                bottom: 0,
+                width: `${particle.size}px`,
+                height: `${particle.size}px`,
+                borderRadius: '50%',
+                background: '#C49A2A',
+                animation: `floatUp ${particle.duration}s ${particle.delay}s linear infinite`,
+                opacity: particle.opacity,
+                pointerEvents: 'none',
+              }}
+            />
+          ))}
+        </div>
+      ) : null}
 
       <div className="relative z-10 flex w-full max-w-xl flex-col items-center text-center">
         <motion.p
@@ -129,6 +131,7 @@ function ProfilSalsa() {
               <img
                 src="/salsa-profile.png"
                 alt="Salsabila Dectylana Fajari"
+                loading="lazy"
                 style={{
                   width: '100%',
                   height: '100%',

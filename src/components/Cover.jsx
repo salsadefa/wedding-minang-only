@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 
-function Cover({ onOpen }) {
+function Cover({ isLowEnd = false, onOpen }) {
   const [guestName, setGuestName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [isDesktop, setIsDesktop] = useState(
@@ -107,6 +107,7 @@ function Cover({ onOpen }) {
     >
       <img
         src="/background-merah.svg"
+        loading="lazy"
         style={{
           position: 'absolute',
           inset: 0,
@@ -120,8 +121,9 @@ function Cover({ onOpen }) {
 
       <motion.img
         src="/goldflower.svg"
-        animate={{ rotate: [0, 30, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        loading="lazy"
+        animate={isLowEnd ? undefined : { rotate: [0, 30, 0] }}
+        transition={isLowEnd ? undefined : { duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
           left: `${(coords.goldflower.x / canvas.w) * 100}%`,
@@ -136,8 +138,9 @@ function Cover({ onOpen }) {
 
       <motion.img
         src="/rosegoldflower.svg"
-        animate={{ rotate: 360 }}
-        transition={{ duration: 6, repeat: Infinity, ease: 'linear' }}
+        loading="lazy"
+        animate={isLowEnd ? undefined : { rotate: 360 }}
+        transition={isLowEnd ? undefined : { duration: 6, repeat: Infinity, ease: 'linear' }}
         style={{
           position: 'absolute',
           left: `${(coords.rosegoldflower.x / canvas.w) * 100}%`,
@@ -152,8 +155,9 @@ function Cover({ onOpen }) {
 
       <motion.img
         src="/flower1.svg"
-        animate={{ x: [-2, 2, -2] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        loading="lazy"
+        animate={isLowEnd ? undefined : { x: [-2, 2, -2] }}
+        transition={isLowEnd ? undefined : { duration: 3, repeat: Infinity, ease: 'easeInOut' }}
         style={{
           position: 'absolute',
           left: `${(coords.flower1.x / canvas.w) * 100}%`,
@@ -177,8 +181,9 @@ function Cover({ onOpen }) {
       >
         <motion.img
           src="/envelope-love.svg"
-          animate={{ scale: [1, 1.04, 1] }}
-          transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+          loading="lazy"
+          animate={isLowEnd ? undefined : { scale: [1, 1.04, 1] }}
+          transition={isLowEnd ? undefined : { duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           style={{
             width: '100%',
             height: 'auto',
@@ -189,6 +194,7 @@ function Cover({ onOpen }) {
         />
         <motion.img
           src="/Prangko.svg"
+          loading="lazy"
           initial={{ y: -40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{

@@ -1,20 +1,22 @@
-import { useEffect, useRef, useState } from 'react'
-import AmplopDigital from './components/AmplopDigital.jsx'
-import Closing from './components/Closing.jsx'
+import React, { Suspense, useEffect, useRef, useState } from 'react'
 import Cover from './components/Cover.jsx'
-import Gallery from './components/Gallery.jsx'
 import MusicPlayer from './components/MusicPlayer.jsx'
 import Navbar from './components/Navbar.jsx'
-import ProfilArkan from './components/ProfilArkan.jsx'
-import ProfilSalsa from './components/ProfilSalsa.jsx'
-import RSVP from './components/RSVP.jsx'
-import SaveTheDate from './components/SaveTheDate.jsx'
+
+const ProfilSalsa = React.lazy(() => import('./components/ProfilSalsa.jsx'))
+const ProfilArkan = React.lazy(() => import('./components/ProfilArkan.jsx'))
+const SaveTheDate = React.lazy(() => import('./components/SaveTheDate.jsx'))
+const RSVP = React.lazy(() => import('./components/RSVP.jsx'))
+const AmplopDigital = React.lazy(() => import('./components/AmplopDigital.jsx'))
+const Gallery = React.lazy(() => import('./components/Gallery.jsx'))
+const Closing = React.lazy(() => import('./components/Closing.jsx'))
 
 const SECTION_IDS = ['anak-daro', 'marapulai', 'tanggal', 'rsvp', 'kado', 'galeri', 'closing']
 const PROGRESS_INTERVAL = 30
 
 function App() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isLowEnd, setIsLowEnd] = useState(false)
   const [activeSection, setActiveSection] = useState('anak-daro')
   const [progress, setProgress] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -87,6 +89,17 @@ function App() {
   useEffect(() => {
     activeSectionRef.current = activeSection
   }, [activeSection])
+
+  useEffect(() => {
+    const lowCPU =
+      typeof navigator.hardwareConcurrency === 'number' &&
+      navigator.hardwareConcurrency <= 4
+    const lowMemory =
+      typeof navigator.deviceMemory === 'number' && navigator.deviceMemory <= 2
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+    setIsLowEnd(lowCPU || lowMemory || prefersReducedMotion)
+  }, [])
 
   useEffect(() => {
     let typingTimer = null
@@ -234,7 +247,7 @@ function App() {
   return (
     <>
       {!isOpen ? (
-        <Cover onOpen={() => setIsOpen(true)} />
+        <Cover isLowEnd={isLowEnd} onOpen={() => setIsOpen(true)} />
       ) : (
         <>
           <div
@@ -274,13 +287,15 @@ function App() {
               paddingBottom: 'calc(70px + env(safe-area-inset-bottom))',
             }}
           >
-            <ProfilSalsa />
-            <ProfilArkan />
-            <SaveTheDate />
-            <RSVP />
-            <AmplopDigital />
-            <Gallery />
-            <Closing />
+            <Suspense fallback={<div style={{ height: '100dvh', background: '#7B1A1A' }} />}>
+              <ProfilSalsa isLowEnd={isLowEnd} />
+              <ProfilArkan isLowEnd={isLowEnd} />
+              <SaveTheDate isLowEnd={isLowEnd} />
+              <RSVP isLowEnd={isLowEnd} />
+              <AmplopDigital isLowEnd={isLowEnd} />
+              <Gallery isLowEnd={isLowEnd} />
+              <Closing isLowEnd={isLowEnd} />
+            </Suspense>
           </div>
           <MusicPlayer />
           <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
