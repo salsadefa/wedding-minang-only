@@ -120,7 +120,7 @@ function Cover({ isLowEnd = false, onOpen }) {
       />
 
       <motion.img
-        src="/goldflower.png"
+        src="/goldflower.svg"
         loading="eager"
         animate={isLowEnd ? undefined : { rotate: [0, 30, 0] }}
         transition={isLowEnd ? undefined : { duration: 4, repeat: Infinity, ease: 'easeInOut' }}
@@ -137,7 +137,7 @@ function Cover({ isLowEnd = false, onOpen }) {
       />
 
       <motion.img
-        src="/rosegoldflower.png"
+        src="/rosegoldflower.svg"
         loading="eager"
         animate={isLowEnd ? undefined : { rotate: 360 }}
         transition={isLowEnd ? undefined : { duration: 6, repeat: Infinity, ease: 'linear' }}
