@@ -106,8 +106,8 @@ function Cover({ isLowEnd = false, onOpen }) {
       }}
     >
       <img
-        src="/background-merah.svg"
-        loading="lazy"
+        src={isDesktop ? '/background-merah-desktop.png' : '/background-merah.png'}
+        loading="eager"
         style={{
           position: 'absolute',
           inset: 0,
@@ -120,8 +120,8 @@ function Cover({ isLowEnd = false, onOpen }) {
       />
 
       <motion.img
-        src="/goldflower.svg"
-        loading="lazy"
+        src="/goldflower.png"
+        loading="eager"
         animate={isLowEnd ? undefined : { rotate: [0, 30, 0] }}
         transition={isLowEnd ? undefined : { duration: 4, repeat: Infinity, ease: 'easeInOut' }}
         style={{
@@ -137,8 +137,8 @@ function Cover({ isLowEnd = false, onOpen }) {
       />
 
       <motion.img
-        src="/rosegoldflower.svg"
-        loading="lazy"
+        src="/rosegoldflower.png"
+        loading="eager"
         animate={isLowEnd ? undefined : { rotate: 360 }}
         transition={isLowEnd ? undefined : { duration: 6, repeat: Infinity, ease: 'linear' }}
         style={{
@@ -154,8 +154,8 @@ function Cover({ isLowEnd = false, onOpen }) {
       />
 
       <motion.img
-        src="/flower1.svg"
-        loading="lazy"
+        src="/flower1.png"
+        loading="eager"
         animate={isLowEnd ? undefined : { x: [-2, 2, -2] }}
         transition={isLowEnd ? undefined : { duration: 3, repeat: Infinity, ease: 'easeInOut' }}
         style={{
@@ -180,8 +180,8 @@ function Cover({ isLowEnd = false, onOpen }) {
         }}
       >
         <motion.img
-          src="/envelope-love.svg"
-          loading="lazy"
+          src="/envelope-love.png"
+          loading="eager"
           animate={isLowEnd ? undefined : { scale: [1, 1.04, 1] }}
           transition={isLowEnd ? undefined : { duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           style={{
@@ -193,8 +193,8 @@ function Cover({ isLowEnd = false, onOpen }) {
           }}
         />
         <motion.img
-          src="/Prangko.svg"
-          loading="lazy"
+          src="/Prangko.png"
+          loading="eager"
           initial={{ y: -40, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{
