@@ -1,9 +1,8 @@
 import { useEffect, useRef, useState } from 'react'
 import AmplopDigital from './components/AmplopDigital.jsx'
 import Closing from './components/Closing.jsx'
-import CurtainTransition from './components/CurtainTransition.jsx'
+import Cover from './components/Cover.jsx'
 import Gallery from './components/Gallery.jsx'
-import LoadingScreen from './components/LoadingScreen.jsx'
 import MusicPlayer from './components/MusicPlayer.jsx'
 import Navbar from './components/Navbar.jsx'
 import ProfilArkan from './components/ProfilArkan.jsx'
@@ -15,12 +14,10 @@ const SECTION_IDS = ['anak-daro', 'marapulai', 'tanggal', 'rsvp', 'kado', 'galer
 const PROGRESS_INTERVAL = 30
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true)
+  const [isOpen, setIsOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('anak-daro')
   const [progress, setProgress] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
-  const [showCurtain, setShowCurtain] = useState(true)
-  const [navbarVisible, setNavbarVisible] = useState(false)
   const scrollContainerRef = useRef(null)
   const autoScrollTimerRef = useRef(null)
   const progressIntervalRef = useRef(null)
@@ -92,14 +89,6 @@ function App() {
   }, [activeSection])
 
   useEffect(() => {
-    console.log('scrollContainerRef.current:', scrollContainerRef.current)
-    console.log('scrollContainerRef tagName:', scrollContainerRef.current?.tagName)
-    console.log('scrollContainerRef scrollHeight:', scrollContainerRef.current?.scrollHeight)
-    console.log('scrollContainerRef clientHeight:', scrollContainerRef.current?.clientHeight)
-    console.log('scroll container style:', scrollContainerRef.current?.style?.cssText)
-  }, [])
-
-  useEffect(() => {
     let typingTimer = null
 
     const handleInput = (event) => {
@@ -150,7 +139,6 @@ function App() {
     const handleScroll = () => {
       const scrollTop = container.scrollTop
       const viewportHeight = container.clientHeight
-      console.log('scrollTop:', scrollTop, 'viewportHeight:', viewportHeight)
 
       let currentSection = SECTION_IDS[0]
 
@@ -158,19 +146,16 @@ function App() {
         const element = document.getElementById(id)
 
         if (!element) {
-          console.log('MISSING element with id:', id)
           continue
         }
 
         const elementTop = element.offsetTop
-        console.log('id:', id, 'offsetTop:', elementTop)
 
         if (scrollTop >= elementTop - viewportHeight / 2) {
           currentSection = id
         }
       }
 
-      console.log('→ activeSection set to:', currentSection)
       setActiveSection(currentSection)
 
       isManualScrollRef.current = true
@@ -189,10 +174,25 @@ function App() {
     handleScroll()
 
     return () => container.removeEventListener('scroll', handleScroll)
-  }, [isLoading])
+  }, [isOpen])
 
   useEffect(() => {
-    if (!navbarVisible) {
+    if (!isOpen) {
+      return undefined
+    }
+
+    const anakDaro = document.getElementById('anak-daro')
+
+    if (anakDaro) {
+      anakDaro.scrollIntoView({ behavior: 'auto' })
+    }
+
+    setActiveSection('anak-daro')
+    return undefined
+  }, [isOpen])
+
+  useEffect(() => {
+    if (!isOpen) {
       return undefined
     }
 
@@ -203,23 +203,7 @@ function App() {
       window.clearInterval(autoScrollTimerRef.current)
       window.clearInterval(progressIntervalRef.current)
     }
-  }, [activeSection, navbarVisible])
-
-  const handleCurtainComplete = () => {
-    setShowCurtain(false)
-    const anakDaro = document.getElementById('anak-daro')
-
-    if (anakDaro) {
-      anakDaro.scrollIntoView({ behavior: 'smooth' })
-    }
-
-    window.setTimeout(() => {
-      setNavbarVisible(true)
-      setActiveSection('anak-daro')
-      startAutoScroll()
-      startProgressBar()
-    }, 600)
-  }
+  }, [activeSection, isOpen])
 
   const handleNavClick = (sectionId) => {
     isManualScrollRef.current = true
@@ -249,34 +233,32 @@ function App() {
 
   return (
     <>
-      {isLoading ? <LoadingScreen onComplete={() => setIsLoading(false)} /> : null}
-      {!isLoading ? (
+      {!isOpen ? (
+        <Cover onOpen={() => setIsOpen(true)} />
+      ) : (
         <>
-          {showCurtain ? <CurtainTransition onComplete={handleCurtainComplete} /> : null}
-          {navbarVisible ? (
+          <div
+            style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
+              right: 0,
+              height: '3px',
+              zIndex: 90,
+              background: 'rgba(255,255,255,0.1)',
+              opacity: isPaused ? 0.5 : 1,
+            }}
+          >
             <div
               style={{
-                position: 'fixed',
-                top: 0,
-                left: 0,
-                right: 0,
-                height: '3px',
-                zIndex: 90,
-                background: 'rgba(255,255,255,0.1)',
-                opacity: isPaused ? 0.5 : 1,
+                height: '100%',
+                width: `${progress}%`,
+                background: 'linear-gradient(to right, #C49A2A, #F0D080)',
+                transition: 'width 0.03s linear',
+                borderRadius: '0 2px 2px 0',
               }}
-            >
-              <div
-                style={{
-                  height: '100%',
-                  width: `${progress}%`,
-                  background: 'linear-gradient(to right, #C49A2A, #F0D080)',
-                  transition: 'width 0.03s linear',
-                  borderRadius: '0 2px 2px 0',
-                }}
-              />
-            </div>
-          ) : null}
+            />
+          </div>
           <div
             id="snap-scroll-container"
             ref={scrollContainerRef}
@@ -300,12 +282,10 @@ function App() {
             <Gallery />
             <Closing />
           </div>
-          {navbarVisible ? <MusicPlayer /> : null}
-          {navbarVisible ? (
-            <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
-          ) : null}
+          <MusicPlayer />
+          <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
         </>
-      ) : null}
+      )}
     </>
   )
 }
