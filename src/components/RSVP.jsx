@@ -432,7 +432,8 @@ function RSVP({ isLowEnd = false }) {
                   <label className="mb-2 block text-[10px] uppercase tracking-[0.3em] text-ivory">
                     Pesan untuk Pengantin
                   </label>
-                  <textarea
+                  <input
+                    type="text"
                     value={pesan}
                     onChange={(event) => {
                       setPesan(event.target.value)
@@ -441,13 +442,7 @@ function RSVP({ isLowEnd = false }) {
                       }
                     }}
                     placeholder="Tuliskan doa dan pesanmu untuk kami"
-                    style={{
-                      ...fieldStyle,
-                      fontFamily: 'Lora',
-                      height: '96px',
-                      resize: 'none',
-                    }}
-                    className="placeholder:text-ivory placeholder:opacity-50 focus:outline-none"
+                    className="w-full rounded-[8px] border border-gold bg-[#8C2020] px-[12px] py-[6px] text-[13px] text-ivory placeholder:text-ivory placeholder:opacity-50 focus:outline-none"
                   />
                 </motion.div>
 
