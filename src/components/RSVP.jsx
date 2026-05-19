@@ -33,7 +33,7 @@ function RSVP({ isLowEnd = false }) {
     borderRadius: '12px',
     color: '#F5E6C8',
     padding: '10px 14px',
-    fontSize: '13px',
+    fontSize: '16px',
   }
 
   const glassCardStyle = {
@@ -432,8 +432,7 @@ function RSVP({ isLowEnd = false }) {
                   <label className="mb-2 block text-[10px] uppercase tracking-[0.3em] text-ivory">
                     Pesan untuk Pengantin
                   </label>
-                  <input
-                    type="text"
+                  <textarea
                     value={pesan}
                     onChange={(event) => {
                       setPesan(event.target.value)
@@ -442,7 +441,19 @@ function RSVP({ isLowEnd = false }) {
                       }
                     }}
                     placeholder="Tuliskan doa dan pesanmu untuk kami"
-                    className="w-full rounded-[8px] border border-gold bg-[#8C2020] px-[12px] py-[6px] text-[13px] text-ivory placeholder:text-ivory placeholder:opacity-50 focus:outline-none"
+                    style={{
+                      background: '#8C2020',
+                      border: '1px solid #C49A2A',
+                      borderRadius: '8px',
+                      padding: '10px 14px',
+                      color: '#F5E6C8',
+                      fontFamily: 'Lora, serif',
+                      fontSize: '16px',
+                      width: '100%',
+                      height: '80px',
+                      resize: 'none',
+                    }}
+                    className="placeholder:text-ivory placeholder:opacity-50 focus:outline-none"
                   />
                 </motion.div>
 
