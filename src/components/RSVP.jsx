@@ -509,7 +509,11 @@ function RSVP({ isLowEnd = false }) {
 
             <button
               type="button"
-              onClick={() => setHasSubmitted(false)}
+              onClick={() => {
+                setHasSubmitted(false)
+                setSuccessMessage('')
+                setErrorMessage('')
+              }}
               className="mt-1 text-[12px] text-gold underline opacity-70"
             >
               Edit konfirmasi
