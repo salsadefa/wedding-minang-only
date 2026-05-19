@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/salsaarkan", "destination": "/" },
+    { "source": "/salsaarkan/(.*)", "destination": "/" }
+  ]
+}
