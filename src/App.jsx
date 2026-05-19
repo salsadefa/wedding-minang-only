@@ -17,11 +17,12 @@ const PROGRESS_INTERVAL = 30
 function App() {
   const [isOpen, setIsOpen] = useState(false)
   const [isLowEnd, setIsLowEnd] = useState(false)
-  const [containerHeight, setContainerHeight] = useState(() => window.innerHeight)
+  const [containerHeight, setContainerHeight] = useState(window.innerHeight)
   const [activeSection, setActiveSection] = useState('anak-daro')
   const [progress, setProgress] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
   const scrollContainerRef = useRef(null)
+  const initialHeight = useRef(window.innerHeight)
   const autoScrollTimerRef = useRef(null)
   const progressIntervalRef = useRef(null)
   const resumeAutoScrollTimeoutRef = useRef(null)
@@ -92,7 +93,21 @@ function App() {
   }, [activeSection])
 
   useEffect(() => {
-    setContainerHeight(window.innerHeight)
+    setContainerHeight(initialHeight.current)
+
+    const handleVisualViewport = () => {
+      // Keep the container locked to the initial viewport height.
+    }
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleVisualViewport)
+    }
+
+    return () => {
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleVisualViewport)
+      }
+    }
   }, [])
 
   useEffect(() => {
@@ -281,6 +296,9 @@ function App() {
             id="snap-scroll-container"
             ref={scrollContainerRef}
             style={{
+              position: 'fixed',
+              top: 0,
+              left: 0,
               width: '100vw',
               maxWidth: '100vw',
               height: `${containerHeight}px`,
