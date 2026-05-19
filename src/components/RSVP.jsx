@@ -157,6 +157,8 @@ function RSVP({ isLowEnd = false }) {
       style={{
         background:
           'linear-gradient(to bottom, #7B1A1A 0%, #5C1A0E 60%, #3B1F0E 100%)',
+        height: '100dvh',
+        maxHeight: '100dvh',
         scrollSnapAlign: 'start',
         scrollSnapStop: 'always',
         overflow: 'hidden',

@@ -218,6 +218,32 @@ function App() {
     }
   }, [activeSection, isOpen])
 
+  useEffect(() => {
+    const handleResize = () => {
+      const container = scrollContainerRef.current
+
+      if (!container) {
+        return
+      }
+
+      container.style.height = `${window.innerHeight}px`
+    }
+
+    window.addEventListener('resize', handleResize)
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleResize)
+    }
+
+    return () => {
+      window.removeEventListener('resize', handleResize)
+
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleResize)
+      }
+    }
+  }, [])
+
   const handleNavClick = (sectionId) => {
     isManualScrollRef.current = true
     window.clearInterval(autoScrollTimerRef.current)
@@ -278,7 +304,7 @@ function App() {
             style={{
               width: '100vw',
               maxWidth: '100vw',
-              height: '100dvh',
+              height: `${window.innerHeight}px`,
               margin: 0,
               paddingLeft: 0,
               paddingRight: 0,
