@@ -118,7 +118,7 @@ function Cover({ isLowEnd = false, onOpen }) {
       />
 
       <motion.img
-        src="/goldflower.svg"
+        src="/goldflower.webp"
         loading="eager"
         animate={isLowEnd ? undefined : { rotate: [0, 30, 0] }}
         transition={isLowEnd ? undefined : { duration: 4, repeat: Infinity, ease: 'easeInOut' }}
@@ -135,7 +135,7 @@ function Cover({ isLowEnd = false, onOpen }) {
       />
 
       <motion.img
-        src="/rosegoldflower.svg"
+        src="/rosegoldflower.webp"
         loading="eager"
         animate={isLowEnd ? undefined : { rotate: 360 }}
         transition={isLowEnd ? undefined : { duration: 6, repeat: Infinity, ease: 'linear' }}
@@ -180,6 +180,8 @@ function Cover({ isLowEnd = false, onOpen }) {
         <motion.img
           src="/envelope-love.png"
           loading="eager"
+          width="316"
+          height="363"
           animate={isLowEnd ? undefined : { scale: [1, 1.04, 1] }}
           transition={isLowEnd ? undefined : { duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           style={{
