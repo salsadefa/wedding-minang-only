@@ -72,8 +72,6 @@ function Cover({ isLowEnd = false, onOpen }) {
       '/minang-7.jpg',
       '/minang-8.jpg',
       '/minang-9.jpg',
-      '/songket-padang.svg',
-      '/songket-padang-mobile.svg',
       '/rumah-gadang.svg',
     ]
 
