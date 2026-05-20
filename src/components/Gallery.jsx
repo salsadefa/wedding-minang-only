@@ -14,7 +14,7 @@ const photos = [
 
 function Gallery({ isLowEnd = false }) {
   const [currentIndex, setCurrentIndex] = useState(0)
-  const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.svg')
+  const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.webp')
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
   const [dragStart, setDragStart] = useState(null)
 
@@ -22,8 +22,8 @@ function Gallery({ isLowEnd = false }) {
     const update = () => {
       setSongketSrc(
         window.innerWidth >= 768
-          ? '/songket-padang.svg'
-          : '/songket-padang-mobile.svg',
+          ? '/songket-padang.webp'
+          : '/songket-padang-mobile.webp',
       )
       setIsMobile(window.innerWidth < 768)
     }
@@ -127,7 +127,7 @@ function Gallery({ isLowEnd = false }) {
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
           animation:
-            !isLowEnd && songketSrc === '/songket-padang-mobile.svg'
+            !isLowEnd && songketSrc === '/songket-padang-mobile.webp'
               ? 'breathe 6s ease-in-out infinite'
               : 'none',
           transformOrigin: 'center center',

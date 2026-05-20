@@ -97,7 +97,7 @@ function SaveTheDate({ isLowEnd = false }) {
   const isInView = useInView(sectionRef, { once: true, amount: 0.4 })
   const [timeLeft, setTimeLeft] = useState(() => getTimeLeft())
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-  const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.svg')
+  const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.webp')
 
   useEffect(() => {
     const intervalId = window.setInterval(() => {
@@ -119,8 +119,8 @@ function SaveTheDate({ isLowEnd = false }) {
     const update = () => {
       setSongketSrc(
         window.innerWidth >= 768
-          ? '/songket-padang.svg'
-          : '/songket-padang-mobile.svg',
+          ? '/songket-padang.webp'
+          : '/songket-padang-mobile.webp',
       )
     }
 
@@ -153,7 +153,7 @@ function SaveTheDate({ isLowEnd = false }) {
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
           animation:
-            !isLowEnd && songketSrc === '/songket-padang-mobile.svg'
+            !isLowEnd && songketSrc === '/songket-padang-mobile.webp'
               ? 'breathe 6s ease-in-out infinite'
               : 'none',
           transformOrigin: 'center center',

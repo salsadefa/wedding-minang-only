@@ -88,7 +88,7 @@ function AmplopDigital({ isLowEnd = false }) {
   const [copiedAccount, setCopiedAccount] = useState('')
   const [addressCopied, setAddressCopied] = useState(false)
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-  const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.svg')
+  const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.webp')
 
   useEffect(() => {
     const update = () => setIsMobile(window.innerWidth < 768)
@@ -102,8 +102,8 @@ function AmplopDigital({ isLowEnd = false }) {
     const update = () => {
       setSongketSrc(
         window.innerWidth >= 768
-          ? '/songket-padang.svg'
-          : '/songket-padang-mobile.svg',
+          ? '/songket-padang.webp'
+          : '/songket-padang-mobile.webp',
       )
     }
 
@@ -158,7 +158,7 @@ function AmplopDigital({ isLowEnd = false }) {
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
           animation:
-            songketSrc === '/songket-padang-mobile.svg'
+            songketSrc === '/songket-padang-mobile.webp'
               ? 'breathe 6s ease-in-out infinite'
               : 'none',
           transformOrigin: 'center center',

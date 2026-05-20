@@ -17,7 +17,7 @@ function Closing({ isLowEnd = false }) {
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.3 })
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768)
-  const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.svg')
+  const [songketSrc, setSongketSrc] = useState('/songket-padang-mobile.webp')
   const particles = useMemo(
     () =>
       Array.from({ length: 40 }, (_, index) => ({
@@ -43,8 +43,8 @@ function Closing({ isLowEnd = false }) {
     const update = () => {
       setSongketSrc(
         window.innerWidth >= 768
-          ? '/songket-padang.svg'
-          : '/songket-padang-mobile.svg',
+          ? '/songket-padang.webp'
+          : '/songket-padang-mobile.webp',
       )
     }
 
@@ -90,7 +90,7 @@ function Closing({ isLowEnd = false }) {
           backgroundRepeat: 'no-repeat',
           opacity: 0.2,
           animation:
-            !isLowEnd && songketSrc === '/songket-padang-mobile.svg'
+            !isLowEnd && songketSrc === '/songket-padang-mobile.webp'
               ? 'breathe 6s ease-in-out infinite'
               : 'none',
           transformOrigin: 'center center',
