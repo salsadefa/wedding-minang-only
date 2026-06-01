@@ -1,5 +1,69 @@
 import { useEffect, useState } from 'react'
-import { motion } from 'framer-motion'
+
+const OPEN_PRELOAD_IMAGES = [
+  '/salsa-profile.png',
+  '/arkan-profile.jpg',
+  '/rumah-gadang.svg',
+  '/latar-rg.png',
+]
+
+const DEFERRED_PRELOAD_IMAGES = [
+  '/minang-1.jpg',
+  '/minang-2.jpg',
+  '/minang-3.jpg',
+  '/minang-4.jpg',
+  '/minang-5.jpg',
+  '/minang-6.jpg',
+  '/minang-7.jpg',
+  '/minang-8.jpg',
+  '/minang-9.jpg',
+]
+
+const preloadImage = (src) =>
+  new Promise((resolve) => {
+    const img = new Image()
+    img.decoding = 'async'
+    img.onload = resolve
+    img.onerror = resolve
+    img.src = src
+  })
+
+const warmImages = (sources) => {
+  let index = 0
+
+  const loadNext = () => {
+    if (index >= sources.length) {
+      return
+    }
+
+    const img = new Image()
+    img.decoding = 'async'
+    img.src = sources[index]
+    index += 1
+
+    schedule(loadNext)
+  }
+
+  const schedule = (callback) => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(callback, { timeout: 3000 })
+      return
+    }
+
+    window.setTimeout(callback, 250)
+  }
+
+  schedule(loadNext)
+}
+
+const warmImagesAfterDelay = (sources) => {
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(() => warmImages(sources), { timeout: 3000 })
+    return
+  }
+
+  window.setTimeout(() => warmImages(sources), 1500)
+}
 
 function Cover({ isLowEnd = false, onOpen }) {
   const [guestName, setGuestName] = useState('')
@@ -55,38 +119,16 @@ function Cover({ isLowEnd = false, onOpen }) {
     ? `${((coords.prangko.y - coords.envelope.y) / coords.envelope.h) * 100}%`
     : '69.6%'
   const prangkoWidth = `${(coords.prangko.w / coords.envelope.w) * 100}%`
+  const flowerSrc = isDesktop ? '/flower1.png' : '/flower1-mobile.png'
+  const envelopeSrc = isDesktop ? '/envelope-love.png' : '/envelope-love-mobile.png'
+  const prangkoSrc = isDesktop ? '/Prangko.png' : '/Prangko-mobile.png'
 
   const handleOpen = () => {
     setIsLoading(true)
 
-    const imagesToLoad = [
-      '/salsa-profile.png',
-      '/arkan-profile.jpg',
-      '/latar-rg.png',
-      '/minang-1.jpg',
-      '/minang-2.jpg',
-      '/minang-3.jpg',
-      '/minang-4.jpg',
-      '/minang-5.jpg',
-      '/minang-6.jpg',
-      '/minang-7.jpg',
-      '/minang-8.jpg',
-      '/minang-9.jpg',
-      '/rumah-gadang.svg',
-    ]
-
-    const promises = imagesToLoad.map(
-      (src) =>
-        new Promise((resolve) => {
-          const img = new Image()
-          img.onload = resolve
-          img.onerror = resolve
-          img.src = src
-        }),
-    )
-
-    Promise.all(promises).then(() => {
+    Promise.all(OPEN_PRELOAD_IMAGES.map(preloadImage)).then(() => {
       onOpen()
+      warmImagesAfterDelay(DEFERRED_PRELOAD_IMAGES)
     })
   }
 
@@ -105,7 +147,9 @@ function Cover({ isLowEnd = false, onOpen }) {
     >
       <img
         src={isDesktop ? '/background-merah-desktop.png' : '/background-merah.png'}
+        alt=""
         loading="eager"
+        fetchPriority="high"
         style={{
           position: 'absolute',
           inset: 0,
@@ -117,11 +161,11 @@ function Cover({ isLowEnd = false, onOpen }) {
         }}
       />
 
-      <motion.img
+      <img
         src="/goldflower.webp"
+        alt=""
         loading="eager"
-        animate={isLowEnd ? undefined : { rotate: [0, 30, 0] }}
-        transition={isLowEnd ? undefined : { duration: 4, repeat: Infinity, ease: 'easeInOut' }}
+        decoding="async"
         style={{
           position: 'absolute',
           left: `${(coords.goldflower.x / canvas.w) * 100}%`,
@@ -131,14 +175,15 @@ function Cover({ isLowEnd = false, onOpen }) {
           zIndex: 1,
           transformOrigin: 'center center',
           pointerEvents: 'none',
+          animation: isLowEnd ? 'none' : 'coverRotateSway 4s ease-in-out infinite',
         }}
       />
 
-      <motion.img
+      <img
         src="/rosegoldflower.webp"
+        alt=""
         loading="eager"
-        animate={isLowEnd ? undefined : { rotate: 360 }}
-        transition={isLowEnd ? undefined : { duration: 6, repeat: Infinity, ease: 'linear' }}
+        decoding="async"
         style={{
           position: 'absolute',
           left: `${(coords.rosegoldflower.x / canvas.w) * 100}%`,
@@ -148,14 +193,15 @@ function Cover({ isLowEnd = false, onOpen }) {
           zIndex: 1,
           transformOrigin: 'center center',
           pointerEvents: 'none',
+          animation: isLowEnd ? 'none' : 'spinVinyl 6s linear infinite',
         }}
       />
 
-      <motion.img
-        src="/flower1.png"
+      <img
+        src={flowerSrc}
+        alt=""
         loading="eager"
-        animate={isLowEnd ? undefined : { x: [-2, 2, -2] }}
-        transition={isLowEnd ? undefined : { duration: 3, repeat: Infinity, ease: 'easeInOut' }}
+        decoding="async"
         style={{
           position: 'absolute',
           left: `${(coords.flower1.x / canvas.w) * 100}%`,
@@ -165,6 +211,7 @@ function Cover({ isLowEnd = false, onOpen }) {
           zIndex: 5,
           transformOrigin: 'center center',
           pointerEvents: 'none',
+          animation: isLowEnd ? 'none' : 'coverFloatX 3s ease-in-out infinite',
         }}
       />
 
@@ -177,32 +224,27 @@ function Cover({ isLowEnd = false, onOpen }) {
           zIndex: 3,
         }}
       >
-        <motion.img
-          src="/envelope-love.png"
+        <img
+          src={envelopeSrc}
+          alt=""
           loading="eager"
+          decoding="async"
           width="316"
           height="363"
-          animate={isLowEnd ? undefined : { scale: [1, 1.04, 1] }}
-          transition={isLowEnd ? undefined : { duration: 3, repeat: Infinity, ease: 'easeInOut' }}
           style={{
             width: '100%',
             height: 'auto',
             display: 'block',
             transformOrigin: 'center center',
             pointerEvents: 'none',
+            animation: isLowEnd ? 'none' : 'coverPulse 3s ease-in-out infinite',
           }}
         />
-        <motion.img
-          src="/Prangko.png"
+        <img
+          src={prangkoSrc}
+          alt=""
           loading="eager"
-          initial={{ y: -40, opacity: 0 }}
-          animate={{ y: 0, opacity: 1 }}
-          transition={{
-            type: 'spring',
-            stiffness: 300,
-            damping: 12,
-            delay: 0.5,
-          }}
+          decoding="async"
           style={{
             position: 'absolute',
             left: prangkoLeft,
@@ -210,6 +252,7 @@ function Cover({ isLowEnd = false, onOpen }) {
             width: prangkoWidth,
             height: 'auto',
             pointerEvents: 'none',
+            animation: 'stampDrop 0.6s cubic-bezier(0.2, 0.9, 0.35, 1.25) 0.5s both',
           }}
         />
       </div>
@@ -279,10 +322,10 @@ function Cover({ isLowEnd = false, onOpen }) {
           *Mohon maaf apabila terdapat kesalahan dalam penulisan nama / gelar
         </p>
 
-        <motion.button
+        <button
+          className="cover-open-button"
           onClick={handleOpen}
           disabled={isLoading}
-          whileTap={{ scale: isLoading ? 1 : 0.97 }}
           style={{
             marginTop: '20px',
             background: '#F5E6C8',
@@ -306,15 +349,14 @@ function Cover({ isLowEnd = false, onOpen }) {
         >
           {isLoading ? (
             <>
-              <motion.div
-                animate={{ rotate: 360 }}
-                transition={{ duration: 1, repeat: Infinity, ease: 'linear' }}
+              <div
                 style={{
                   width: '16px',
                   height: '16px',
                   border: '2px solid #7B1A1A',
                   borderTopColor: 'transparent',
                   borderRadius: '50%',
+                  animation: 'spinVinyl 1s linear infinite',
                 }}
               />
               Memuat...
@@ -322,7 +364,7 @@ function Cover({ isLowEnd = false, onOpen }) {
           ) : (
             'Buka Undangan'
           )}
-        </motion.button>
+        </button>
       </div>
     </section>
   )

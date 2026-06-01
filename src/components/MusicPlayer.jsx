@@ -56,7 +56,7 @@ function MusicPlayer() {
 
   return (
     <>
-      <audio ref={audioRef} src="/musik-minang.mp3" preload="auto" />
+      <audio ref={audioRef} src="/musik-minang.mp3" preload="none" />
       <button
         onClick={toggleMusic}
         style={{

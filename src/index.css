@@ -31,6 +31,17 @@
   }
 }
 
+#anak-daro,
+#marapulai,
+#tanggal,
+#rsvp,
+#kado,
+#galeri,
+#closing {
+  content-visibility: auto;
+  contain-intrinsic-size: 100dvh;
+}
+
 @keyframes scrollCarousel {
   0% {
     transform: translateX(0);
@@ -95,6 +106,48 @@
   }
 }
 
+@keyframes coverRotateSway {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+
+  50% {
+    transform: rotate(30deg);
+  }
+}
+
+@keyframes coverFloatX {
+  0%, 100% {
+    transform: translateX(-2px);
+  }
+
+  50% {
+    transform: translateX(2px);
+  }
+}
+
+@keyframes coverPulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(1.04);
+  }
+}
+
+@keyframes stampDrop {
+  0% {
+    opacity: 0;
+    transform: translateY(-40px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .gallery-scene {
   perspective: 1000px;
 }
@@ -106,4 +159,8 @@
 
 .navbar-track::-webkit-scrollbar {
   display: none;
+}
+
+.cover-open-button:active:not(:disabled) {
+  transform: scale(0.97);
 }

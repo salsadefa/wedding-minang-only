@@ -1,8 +1,8 @@
 import React, { Suspense, useEffect, useRef, useState } from 'react'
 import Cover from './components/Cover.jsx'
-import MusicPlayer from './components/MusicPlayer.jsx'
-import Navbar from './components/Navbar.jsx'
 
+const MusicPlayer = React.lazy(() => import('./components/MusicPlayer.jsx'))
+const Navbar = React.lazy(() => import('./components/Navbar.jsx'))
 const ProfilSalsa = React.lazy(() => import('./components/ProfilSalsa.jsx'))
 const ProfilArkan = React.lazy(() => import('./components/ProfilArkan.jsx'))
 const SaveTheDate = React.lazy(() => import('./components/SaveTheDate.jsx'))
@@ -320,8 +320,10 @@ function App() {
               <Closing isLowEnd={isLowEnd} />
             </Suspense>
           </div>
-          <MusicPlayer />
-          <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
+          <Suspense fallback={null}>
+            <MusicPlayer />
+            <Navbar activeSection={activeSection} onNavClick={handleNavClick} />
+          </Suspense>
         </>
       )}
     </>
