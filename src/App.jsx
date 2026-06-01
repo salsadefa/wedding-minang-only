@@ -31,7 +31,7 @@ function App() {
   const activeSectionRef = useRef(activeSection)
 
   const getSectionDuration = (sectionId) =>
-    sectionId === 'galeri' ? 20000 : 3000
+    sectionId === 'galeri' ? 20000 : sectionId === 'anak-daro' ? 5000 : 3000
 
   const startProgressBar = () => {
     const sectionDuration = getSectionDuration(activeSectionRef.current)
