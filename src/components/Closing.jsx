@@ -61,7 +61,6 @@ function Closing({ isLowEnd = false }) {
       className=""
       style={{
         minHeight: '100dvh',
-        height: '100dvh',
         width: '100vw',
         maxWidth: '100vw',
         position: 'relative',
@@ -77,7 +76,7 @@ function Closing({ isLowEnd = false }) {
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: '8px',
-        paddingBottom: 'calc(70px + env(safe-area-inset-bottom))',
+        paddingBottom: 'calc(100px + env(safe-area-inset-bottom))',
       }}
     >
       <div
@@ -267,16 +266,108 @@ function Closing({ isLowEnd = false }) {
           </h2>
           <p
             style={{
-              color: '#C49A2A',
-              fontSize: '14px',
-              letterSpacing: '0.1em',
+              fontFamily: 'Lora',
+              fontSize: 'clamp(14px, 3vw, 18px)',
+              fontWeight: '600',
+              letterSpacing: '0.05em',
+              background: 'linear-gradient(135deg, #C49A2A 0%, #F0D080 50%, #C49A2A 100%)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+              backgroundClip: 'text',
+              textShadow: 'none',
+              filter: 'drop-shadow(0 0 8px rgba(196,154,42,0.4))',
               textTransform: 'uppercase',
               textAlign: 'center',
               marginTop: '0.25rem',
             }}
           >
-            21 Juni 2026
+            #SALamonyoJoARKAN
           </p>
+          {/* Duajiwa Watermark */}
+          <div
+            style={{
+              marginTop: '24px',
+              paddingTop: '16px',
+              borderTop: '1px solid rgba(196,154,42,0.2)',
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              gap: '10px',
+              width: '100%',
+            }}
+          >
+            <p
+              style={{
+                fontFamily: 'Lora, serif',
+                fontSize: '11px',
+                fontStyle: 'italic',
+                color: 'rgba(196,154,42,0.6)',
+                margin: '0 0 6px 0',
+                letterSpacing: '0.03em',
+              }}
+            >
+              Buat undanganmu bersama Duajiwa
+            </p>
+            <img
+              src="/duajiwalogo-white.png"
+              alt="Duajiwa Invitation"
+              style={{
+                height: '32px',
+                width: 'auto',
+                objectFit: 'contain',
+                opacity: 0.85,
+              }}
+            />
+            <div
+              style={{
+                display: 'flex',
+                gap: '16px',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexWrap: 'nowrap',
+              }}
+            >
+              <a
+                href="https://duajiwa.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none' }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,154,42,0.7)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" />
+                  <line x1="2" y1="12" x2="22" y2="12" />
+                  <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+                </svg>
+                <span style={{ fontSize: '9px', color: 'rgba(196,154,42,0.7)', fontFamily: 'Lora, serif' }}>duajiwa.com</span>
+              </a>
+              <span style={{ color: 'rgba(196,154,42,0.3)', fontSize: '10px' }}>|</span>
+              <a
+                href="https://api.whatsapp.com/send/?phone=6282220700245&text=Halo%20admin%2C%20saya%20berminat%20untuk%20pesan%20undangan%20digitalnya"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none' }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,154,42,0.7)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                </svg>
+                <span style={{ fontSize: '9px', color: 'rgba(196,154,42,0.7)', fontFamily: 'Lora, serif' }}>0822 2070 0245</span>
+              </a>
+              <span style={{ color: 'rgba(196,154,42,0.3)', fontSize: '10px' }}>|</span>
+              <a
+                href="https://instagram.com/duajiwa.invitation"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ display: 'flex', alignItems: 'center', gap: '4px', textDecoration: 'none' }}
+              >
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="rgba(196,154,42,0.7)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="2" width="20" height="20" rx="5" />
+                  <circle cx="12" cy="12" r="4" />
+                  <circle cx="17.5" cy="6.5" r="1" fill="rgba(196,154,42,0.7)" stroke="none" />
+                </svg>
+                <span style={{ fontSize: '9px', color: 'rgba(196,154,42,0.7)', fontFamily: 'Lora, serif' }}>duajiwa.invitation</span>
+              </a>
+            </div>
+          </div>
         </motion.div>
 
         <Divider marginTop="0.5rem" marginBottom="0.5rem" />
@@ -301,42 +392,6 @@ function Closing({ isLowEnd = false }) {
           tidak mudah.
         </motion.p>
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: 1.2, duration: 0.6, ease: 'easeOut' }}
-          style={{ marginTop: '1rem', textAlign: 'center' }}
-        >
-          <p
-            style={{
-              fontFamily: 'Lora',
-              fontSize: '10px',
-              color: '#C49A2A',
-              letterSpacing: '0.1em',
-              opacity: 0.7,
-              marginBottom: '4px',
-              textTransform: 'uppercase',
-            }}
-          >
-            Ikuti perjalanan kami
-          </p>
-          <p
-            style={{
-              fontFamily: 'Lora',
-              fontSize: 'clamp(14px, 3vw, 18px)',
-              fontWeight: '600',
-              letterSpacing: '0.05em',
-              background: 'linear-gradient(135deg, #C49A2A 0%, #F0D080 50%, #C49A2A 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              backgroundClip: 'text',
-              textShadow: 'none',
-              filter: 'drop-shadow(0 0 8px rgba(196,154,42,0.4))',
-            }}
-          >
-            #SALamonyoJoARKAN
-          </p>
-        </motion.div>
       </div>
     </section>
   )
