@@ -124,7 +124,7 @@ function AmplopDigital({ isLowEnd = false }) {
 
   const handleCopyAddress = async () => {
     const address =
-      'Jl. Bintaro Permai No. 5, Apartemen Bintaro Park View B1015, Pesanggrahan, Jakarta Selatan, 12320'
+      'Jl. Bintaro Permai No. 5, Apartemen Bintaro Park View B1815, Pesanggrahan, Jakarta Selatan, 12320'
 
     await navigator.clipboard.writeText(address)
     setAddressCopied(true)
@@ -633,7 +633,7 @@ function AmplopDigital({ isLowEnd = false }) {
                     marginTop: '4px',
                   }}
                 >
-                  Jl. Bintaro Permai No. 5, Apartemen Bintaro Park View B1015, Pesanggrahan, Jakarta Selatan, 12320
+                  Jl. Bintaro Permai No. 5, Apartemen Bintaro Park View B1815, Pesanggrahan, Jakarta Selatan, 12320
                 </p>
                 <div style={{ textAlign: 'center', marginTop: '12px' }}>
                   <button
