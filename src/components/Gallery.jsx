@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 
 const photos = [
   '/minang-1.jpg',
+  '/minang11.png',
   '/minang-2.jpg',
   '/minang-3.jpg',
   '/minang-4.jpg',
