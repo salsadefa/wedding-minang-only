@@ -105,10 +105,10 @@ function Cover({ isLowEnd = false, onOpen }) {
         prangko: { x: 647, y: 391, w: 111 },
       }
     : {
-        goldflower: { x: 29, y: 291, w: 176.78 },
-        rosegoldflower: { x: 200.95, y: 168, w: 159 },
-        flower1: { x: 35, y: 243.02, w: 154 },
-        envelope: { x: 101.95, y: 196, w: 194, h: 222.67 },
+        goldflower: { x: 29, y: 241, w: 176.78 },
+        rosegoldflower: { x: 200.95, y: 118, w: 159 },
+        flower1: { x: 35, y: 193.02, w: 154 },
+        envelope: { x: 101.95, y: 146, w: 194, h: 222.67 },
         prangko: { x: 214, y: 351, w: 68 },
       }
 
