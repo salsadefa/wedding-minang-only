@@ -260,7 +260,7 @@ function Cover({ isLowEnd = false, onOpen }) {
       <div
         style={{
           position: 'absolute',
-          top: isDesktop ? '68%' : '62%',
+          top: isDesktop ? '68%' : '55%',
           left: 0,
           right: 0,
           zIndex: 10,
@@ -322,49 +322,72 @@ function Cover({ isLowEnd = false, onOpen }) {
           *Mohon maaf apabila terdapat kesalahan dalam penulisan nama / gelar
         </p>
 
-        <button
-          className="cover-open-button"
-          onClick={handleOpen}
-          disabled={isLoading}
-          style={{
-            marginTop: '20px',
-            background: '#F5E6C8',
-            border: 'none',
-            borderRadius: '50px',
-            padding: '12px 40px',
-            color: '#7B1A1A',
-            fontFamily: 'Lora, serif',
-            fontSize: '15px',
-            fontWeight: '500',
-            letterSpacing: '0.05em',
-            cursor: isLoading ? 'default' : 'pointer',
-            boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
-            opacity: isLoading ? 0.8 : 1,
-            display: 'flex',
-            alignItems: 'center',
-            gap: '8px',
-            minWidth: '180px',
-            justifyContent: 'center',
-          }}
-        >
-          {isLoading ? (
-            <>
-              <div
-                style={{
-                  width: '16px',
-                  height: '16px',
-                  border: '2px solid #7B1A1A',
-                  borderTopColor: 'transparent',
-                  borderRadius: '50%',
-                  animation: 'spinVinyl 1s linear infinite',
-                }}
-              />
-              Memuat...
-            </>
-          ) : (
-            'Buka Undangan'
-          )}
-        </button>
+        <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', gap: '12px', marginTop: '20px' }}>
+          <button
+            className="cover-open-button"
+            onClick={handleOpen}
+            disabled={isLoading}
+            style={{
+              background: '#F5E6C8',
+              border: 'none',
+              borderRadius: '50px',
+              padding: '12px 40px',
+              color: '#7B1A1A',
+              fontFamily: 'Lora, serif',
+              fontSize: '15px',
+              fontWeight: '500',
+              letterSpacing: '0.05em',
+              cursor: isLoading ? 'default' : 'pointer',
+              boxShadow: '0 4px 20px rgba(0,0,0,0.2)',
+              opacity: isLoading ? 0.8 : 1,
+              display: 'flex',
+              alignItems: 'center',
+              gap: '8px',
+              minWidth: '180px',
+              justifyContent: 'center',
+              width: '220px',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            {isLoading ? (
+              <>
+                <div
+                  style={{
+                    width: '16px',
+                    height: '16px',
+                    border: '2px solid #7B1A1A',
+                    borderTopColor: 'transparent',
+                    borderRadius: '50%',
+                    animation: 'spinVinyl 1s linear infinite',
+                  }}
+                />
+                Memuat...
+              </>
+            ) : (
+              'Buka Undangan'
+            )}
+          </button>
+          <button
+            onClick={() => window.open('https://arkansalsa.duajiwa.com', '_blank')}
+            style={{
+              background: 'transparent',
+              border: '1.5px solid #F5E6C8',
+              borderRadius: '50px',
+              padding: '12px 32px',
+              color: '#F5E6C8',
+              fontFamily: 'Lora, serif',
+              fontSize: '15px',
+              fontWeight: '500',
+              letterSpacing: '0.05em',
+              cursor: 'pointer',
+              opacity: 0.85,
+              width: '220px',
+              whiteSpace: 'nowrap',
+            }}
+          >
+            Kisah Kami
+          </button>
+        </div>
       </div>
     </section>
   )
