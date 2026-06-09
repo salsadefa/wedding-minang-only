@@ -15,18 +15,20 @@ function MusicPlayer() {
     audio.loop = true
 
     const tryPlay = () => {
+      if (!audio.src || audio.src === window.location.href) {
+        audio.src = '/musik-minang.mp3'
+        audio.load()
+      }
+
       audio.play()
         .then(() => {
           setIsPlaying(true)
           document.removeEventListener('touchstart', tryPlay)
           document.removeEventListener('click', tryPlay)
         })
-        .catch(() => {
-          // still blocked, keep listeners
-        })
+        .catch(() => {})
     }
 
-    tryPlay()
     document.addEventListener('touchstart', tryPlay, { passive: true })
     document.addEventListener('click', tryPlay)
 
