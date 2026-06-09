@@ -5,6 +5,10 @@ function MusicPlayer() {
   const [isPlaying, setIsPlaying] = useState(false)
 
   useEffect(() => {
+    if (window._preloadedAudio) {
+      audioRef.current = window._preloadedAudio
+    }
+
     const audio = audioRef.current
 
     if (!audio) {
@@ -15,11 +19,6 @@ function MusicPlayer() {
     audio.loop = true
 
     const tryPlay = () => {
-      if (!audio.src || audio.src === window.location.href) {
-        audio.src = '/musik-minang.mp3'
-        audio.load()
-      }
-
       audio.play()
         .then(() => {
           setIsPlaying(true)
@@ -29,6 +28,7 @@ function MusicPlayer() {
         .catch(() => {})
     }
 
+    tryPlay()
     document.addEventListener('touchstart', tryPlay, { passive: true })
     document.addEventListener('click', tryPlay)
 

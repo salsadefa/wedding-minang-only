@@ -126,7 +126,14 @@ function Cover({ isLowEnd = false, onOpen }) {
   const handleOpen = () => {
     setIsLoading(true)
 
-    Promise.all(OPEN_PRELOAD_IMAGES.map(preloadImage)).then(() => {
+    const audio = new Audio('/musik-minang.mp3')
+    audio.preload = 'auto'
+    audio.load()
+    window._preloadedAudio = audio
+
+    const imagesToLoad = OPEN_PRELOAD_IMAGES
+
+    Promise.all(imagesToLoad.map(preloadImage)).then(() => {
       onOpen()
       warmImagesAfterDelay(DEFERRED_PRELOAD_IMAGES)
     })
