@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react'
 
 const OPEN_PRELOAD_IMAGES = [
   '/salsa-profile.png',
-  '/arkan-profile.jpg',
   '/rumah-gadang.svg',
   '/latar-rg.png',
 ]

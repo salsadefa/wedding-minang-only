@@ -131,7 +131,8 @@ function ProfilSalsa({ isLowEnd = false }) {
               <img
                 src="/salsa-profile.png"
                 alt="Salsabila Dectylana Fajari"
-                loading="lazy"
+                loading="eager"
+                fetchPriority="high"
                 style={{
                   width: '100%',
                   height: '100%',
