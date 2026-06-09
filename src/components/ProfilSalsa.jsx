@@ -34,7 +34,7 @@ function ProfilSalsa({ isLowEnd = false }) {
       <div
         className="absolute inset-0 z-[1]"
         style={{
-          backgroundImage: "url('/songket-pattern.svg')",
+          backgroundImage: "url('/songket-pattern.webp')",
           backgroundRepeat: 'repeat',
           backgroundSize: '900px auto',
           backgroundPosition: 'center',
