@@ -34,7 +34,7 @@ function ProfilArkan({ isLowEnd = false }) {
       <div
         className="absolute inset-0 z-[1]"
         style={{
-          backgroundImage: "url('/songket-pattern.webp')",
+          backgroundImage: "url('/songket-pattern.svg')",
           backgroundRepeat: 'repeat',
           backgroundSize: '900px auto',
           backgroundPosition: 'center',

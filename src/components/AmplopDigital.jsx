@@ -186,7 +186,7 @@ function AmplopDigital({ isLowEnd = false }) {
           />
 
           <img
-            src="/flower-putih.webp"
+            src="/flower-putih.svg"
             loading="lazy"
             style={{
               position: 'absolute',
@@ -202,7 +202,7 @@ function AmplopDigital({ isLowEnd = false }) {
           />
 
           <img
-            src="/flower-putih.webp"
+            src="/flower-putih.svg"
             loading="lazy"
             style={{
               position: 'absolute',
@@ -268,7 +268,7 @@ function AmplopDigital({ isLowEnd = false }) {
           ))}
 
           <img
-            src="/bunga-bawah.webp"
+            src="/bunga-bawah.svg"
             loading="lazy"
             style={{
               position: 'absolute',
